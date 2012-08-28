@@ -1,0 +1,13 @@
+ADDITIONAL TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+FOR COMPLETE TERMS, SEE ALSO LICENSE.TXT, WHICH IS INCORPORATED BY REFERENCE
+
+This product includes software derived from "iBATIS Database Layer" and
+"iBATIS SQL Maps" developed by Clinton Begin (http://www.ibatis.com/).
+
+Permission to use the name "iBATIS.NET" in connection with this 
+product has been granted by Clinton Begin.
+
+The names "iBATIS.NET" or "Clinton Begin" must not be used to endorse  
+or promote products derived from this software without prior written
+permission of Clinton Begin. For written permission, please contact 
+clinton.begin@ibatis.com.

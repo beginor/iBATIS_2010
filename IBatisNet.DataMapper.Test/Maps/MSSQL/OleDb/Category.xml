@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Category" xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	
+	<alias>
+		<typeAlias alias="Category" type="IBatisNet.DataMapper.Test.Domain.Category, IBatisNet.DataMapper.Test"/>
+	</alias>
+	
+  <resultMaps>
+    <resultMap id="Category-result" class="Category">
+      <result property="Id" column="Category_ID"/>
+      <result property="Name" column="Category_Name"/>
+      <result property="Guid" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000"/>
+    </resultMap>
+  </resultMaps >
+  	
+	<statements>
+	
+		<select id="GetCategoryWithNullValueReplacementGuid" resultMap="Category-result" >
+		select
+		Category_ID,
+		Category_Name,
+		Category_Guid
+		from Categories
+		where Category_ID = #value#
+		</select>
+    	
+		<select id="GetCategory" parameterClass="Integer" resultClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as Guid
+			from Categories  
+			where Category_ID = #value# 
+		</select>
+		
+	
+		<!-- Test for statement as insert -->
+		<statement id="InsertCategory" parameterClass="Category" resultClass="int">
+			insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				(#Name#, #Guid:Guid#);
+			select SCOPE_IDENTITY() as value
+		</statement><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+
+		<!-- Test for Guid Parameter Class-->
+		<statement id="InsertCategoryGuidParameterClass" parameterClass="Guid" resultClass="int">
+			insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				('toto', #value:Guid#);
+			select SCOPE_IDENTITY() as value
+		</statement><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->		
+	
+		<!-- JIRA 20 Test without specifying the dbtype-->
+		<statement id="InsertCategoryGuidParameterClassJIRA20" parameterClass="Guid" resultClass="int">
+			insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				('toto', #value#);
+			select SCOPE_IDENTITY() as value
+		</statement>
+						
+		<insert id="InsertCategoryViaInsertStatement" parameterClass="Category" >
+			<selectKey property="Id" type="post" resultClass="int">
+				${selectKey}
+            </selectKey>			
+            insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				(#Name#, #Guid:Guid#)
+		</insert><!--Guid for Oledb, UniqueIdentifier for SqlClient, Odbc -->
+		
+		<insert id="InsertCategoryWithProperties" parameterClass="Category" >
+			<selectKey property="Id" type="post" resultClass="int">
+				${selectKey}
+            </selectKey>			
+            insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				(${MyCategoryName}, #Guid:Guid#)
+		</insert>
+		
+		<statement id="InsertCategoryViaParameterMap" parameterMap="InsertParam" resultClass="int">
+			insert into Categories  
+				(Category_Name, Category_Guid)
+			values 
+				(?,?);
+			select SCOPE_IDENTITY() as value
+		</statement>
+		
+		<statement id="InsertCategoryNull" parameterMap="insert-null-params" resultClass="int">
+			insert into Categories  
+				(Category_Name, Category_Guid)
+			values 
+				(?,?);
+			select SCOPE_IDENTITY() as value
+		</statement>
+				
+		<update id="UpdateCategoryViaParameterMap" parameterMap="UpdateParam">
+			update Categories set
+			Category_Name =?,
+			Category_Guid = ?
+			where
+			Category_Id = ?
+		</update>
+				
+		<procedure id="InsertCategoryViaStoreProcedureWithMap" parameterMap="insertMap-params">
+			ps_InsertCategorie
+		</procedure>
+
+		<procedure id="InsertCategoryViaStoreProcedure" parameterMap="insert-params">
+			ps_InsertCategorie
+		</procedure>
+
+		<insert id="InsertCategoryGenerate" parameterMap="insert-generate-params">
+			<selectKey property="Id" type="post" resultClass="int">
+				select @@IDENTITY as value
+            </selectKey>
+            <generate table="Categories" />
+		</insert>
+		
+		<update id="UpdateCategoryGenerate" parameterMap="update-generate-params">
+			<generate table="Categories" by="Category_Id"/>
+		</update>
+		
+		<delete id="DeleteCategoryGenerate" parameterMap="delete-generate-params">
+			<generate table="Categories" by="Category_Id, Category_Name"/>
+		</delete>
+		
+		<!--
+		If using selectByPK-generate-params as parameterMap, 
+		test assertions for other Category class properties fail 
+		since generated SQL statement only selects Category_Id:
+		
+		SELECT \tCategory_Id as Id FROM \tCategories WHERE \tCategory_Id =  ?
+		
+		IBatisNet.Test.NUnit.SqlMapTests.MSSQL.StatementGenerate.TestSelectByPK : 
+		expected:<"toto">
+		but was:<(null)>
+				
+		
+		If using select-generate-params as parameterMap,
+		Throws OleDbException:
+		
+		IBatisNet.Test.NUnit.SqlMapTests.MSSQL.StatementGenerate.TestSelectByPK : 
+		System.InvalidOperationException : Command parameter[1] 'Name' is invalid.
+		Command parameter[2] 'Guid' is invalid.
+		System.Data.OleDb.OleDbException : Multiple-step OLE DB operation generated errors. Check each OLE DB status value, if available. No work was done.
+		
+		at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(Int32 hr)
+		at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForMultpleResults(tagDBPARAMS dbParams, Object& executeResult)
+		at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
+		at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
+		at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
+		at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior)
+		at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader()
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.RunQueryForObject(RequestScope request, IDalSession session, Object parameterObject, Object resultObject) in c:\projects\ibatis\svn\trunk\source\ibatisnet.datamapper\mappedstatements\mappedstatement.cs:line 555
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject, Object resultObject) in c:\projects\ibatis\svn\trunk\source\ibatisnet.datamapper\mappedstatements\mappedstatement.cs:line 502
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject) in c:\projects\ibatis\svn\trunk\source\ibatisnet.datamapper\mappedstatements\mappedstatement.cs:line 483
+		at IBatisNet.DataMapper.SqlMapper.QueryForObject(String statementName, Object parameterObject) in C:\projects\ibatis\svn\trunk\Source\IBatisNet.DataMapper\SqlMapper.cs:line 489
+		at IBatisNet.Test.NUnit.SqlMapTests.MSSQL.StatementGenerate.TestSelectByPK() in C:\projects\ibatis\svn\trunk\Source\IBatisNet.Test\NUnit\SqlMapTests\MSSQL\StatementGenerate.cs:line 54
+		InvalidOperationException
+		
+		Generated SQL statement uses positional parameters for OleDb, 
+		but generated Command object has 3 parameters, one for each Category property,
+		which OleDb doesn't like.
+		Having three parameters works ok with SqlClient since the generated SQL statement 
+		uses a named parameter of @Id instead of ?.
+		
+		SELECT \tCategory_Id as Id,\tCategory_Name as Name,\tCategory_Guid as Guid FROM \tCategories WHERE \tCategory_Id =  ?
+		
+		-->
+		<select id="SelectByPKCategoryGenerate" resultClass="Category" parameterClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" by="Category_Id"/> 
+		</select>
+		
+		<select id="SelectAllCategoryGenerate" resultClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" /> 
+		</select>
+
+		<statement id="DynamicGuid" 
+			resultClass="Category" 
+			parameterClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as Guid
+			from Categories  
+			<dynamic prepend="where">
+				<isNotEqual prepend="and" property="Guid" compareProperty="EmptyGuid">
+					Category_Guid=#Guid:Guid#
+				</isNotEqual>
+			</dynamic>
+		</statement>				
+	</statements>
+	
+	<parameterMaps>
+	
+		<parameterMap id="insertMap-params" class="Hashtable">
+			<parameter property="Id" column="Category_Id" dbType="Integer" /><!-- Int for SqlClient, Obdc; Integer for Oledb -->
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" dbType="Guid"/><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+		</parameterMap>
+			
+		<parameterMap id="insert-params" class="Category">
+			<parameter property="Id" column="Category_Id" dbType="Integer" /><!-- Int for SqlClient, Obdc; Integer for Oledb -->
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" dbType="Guid"/><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+		</parameterMap>
+		
+		<parameterMap id="InsertParam" class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" dbType="Guid"/><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+		</parameterMap>
+		
+		<parameterMap id="insert-null-params" class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000" dbType="Guid"/><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+		</parameterMap>
+				
+		<parameterMap id="UpdateParam" extends="InsertParam" class="Category">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+
+		<!-- Used by generated statement -->
+		
+		<parameterMap id="insert-generate-params" class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" dbType="Guid"/><!--Guid for Oledb, UniqueIdentifier for SqlClient,Odbc -->
+		</parameterMap>
+		
+		<parameterMap id="update-generate-params" extends="insert-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+		
+		<parameterMap id="delete-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+			<parameter property="Name" column="Category_Name"/>
+		</parameterMap>
+			
+		<parameterMap id="selectByPK-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+						
+		<parameterMap id="select-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="Guid" column="Category_Guid" dbType="Guid"/>
+		</parameterMap>
+								
+	</parameterMaps>
+	
+</sqlMap>

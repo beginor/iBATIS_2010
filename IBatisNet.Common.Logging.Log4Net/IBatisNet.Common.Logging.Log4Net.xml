@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IBatisNet.Common.Logging.Log4Net</name>
+    </assembly>
+    <members>
+        <member name="T:IBatisNet.Common.Logging.Impl.Log4NetLogger">
+            <remarks>
+            Log4net is capable of outputting extended debug information about where the current 
+            message was generated: class name, method name, file, line, etc. Log4net assumes that the location
+            information should be gathered relative to where Debug() was called. In IBatisNet, 
+            Debug() is called in IBatisNet.Common.Logging.Impl.Log4NetLogger. This means that
+            the location information will indicate that IBatisNet.Common.Logging.Impl.Log4NetLogger always made
+            the call to Debug(). We need to know where IBatisNet.Common.Logging.ILog.Debug()
+            was called. To do this we need to use the log4net.ILog.Logger.Log method and pass in a Type telling
+            log4net where in the stack to begin looking for location information.
+            </remarks>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.#ctor(log4net.ILog)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="log"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Info(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Info(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Debug(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Debug(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Warn(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Warn(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Trace(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Trace(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Fatal(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Fatal(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Error(System.Object,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLogger.Error(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsInfoEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsWarnEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsErrorEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsFatalEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsDebugEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IBatisNet.Common.Logging.Impl.Log4NetLogger.IsTraceEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:IBatisNet.Common.Logging.Impl.Log4NetLoggerFA">
+            <summary>
+            Concrete subclass of ILoggerFactoryAdapter specific to log4net.
+            </summary>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLoggerFA.#ctor(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="properties"></param>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLoggerFA.GetLogger(System.String)">
+            <summary>
+            Get a ILog instance by type name 
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IBatisNet.Common.Logging.Impl.Log4NetLoggerFA.GetLogger(System.Type)">
+            <summary>
+            Get a ILog instance by type 
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

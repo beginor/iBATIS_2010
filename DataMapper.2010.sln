@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBatisNet.Common.2010", "IBatisNet.Common\IBatisNet.Common.2010.csproj", "{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBatisNet.DataMapper.2010", "IBatisNet.DataMapper\IBatisNet.DataMapper.2010.csproj", "{F3E45F39-3224-4EAD-B138-EB5CC0E32824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBatisNet.DataMapper.Test.2010", "IBatisNet.DataMapper.Test\IBatisNet.DataMapper.Test.2010.csproj", "{998B79D9-800F-493F-A263-306F06906E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBatisNet.Common.Logging.Log4Net.2010", "IBatisNet.Common.Logging.Log4Net\IBatisNet.Common.Logging.Log4Net.2010.csproj", "{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E45F39-3224-4EAD-B138-EB5CC0E32824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E45F39-3224-4EAD-B138-EB5CC0E32824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E45F39-3224-4EAD-B138-EB5CC0E32824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E45F39-3224-4EAD-B138-EB5CC0E32824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998B79D9-800F-493F-A263-306F06906E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998B79D9-800F-493F-A263-306F06906E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998B79D9-800F-493F-A263-306F06906E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998B79D9-800F-493F-A263-306F06906E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

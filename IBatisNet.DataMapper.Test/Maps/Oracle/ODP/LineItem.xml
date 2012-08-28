@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<sqlMap namespace="LineItem" xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="LineItem" type="IBatisNet.DataMapper.Test.Domain.LineItem, IBatisNet.DataMapper.Test" />
+		<typeAlias alias="LineItemCollection" type="IBatisNet.DataMapper.Test.Domain.LineItemCollection, IBatisNet.DataMapper.Test" />
+	</alias>
+	
+	<resultMaps>  	
+		<resultMap id="LineItem-Price" class="decimal">
+			<result property="value"		column="LineItem_Price" dbType="Decimal"/>
+		</resultMap>
+		
+		<resultMap id="LineItem" class="LineItem">
+			<result property="Id"			column="LineItem_ID" dbType="Int32" />
+			<result property="Code"			column="LineItem_Code" dbType="Varchar2" />
+			<result property="Quantity"		column="LineItem_Quantity" dbType="Int32" />
+			<result property="Price"		column="LineItem_Price" dbType="Decimal" />
+		</resultMap>
+		
+		<resultMap id="LineItemWithNullReplacement" class="LineItem">
+			<result property="Id"			column="LineItem_ID" dbType="Int32" />
+			<result property="Code"			column="LineItem_Code" dbType="Varchar2" />
+			<result property="Quantity"		column="LineItem_Quantity" dbType="Int32" />
+			<result property="Price"		column="LineItem_Price" dbType="Decimal" nullValue="-77.77"/>
+		</resultMap>
+		
+	</resultMaps>  
+	
+	<statements>
+		<statement id="GetLineItemPrice"
+					parameterClass="Hashtable"
+					resultMap="LineItem-Price" >
+			select
+				LineItem_Price
+				from LineItems
+				where Order_ID = #Order_ID:Int32#
+				and LineItem_ID = #LineItem_ID:Int32#
+		</statement>
+		
+		<statement id="GetLineItemsForOrder"
+			parameterClass="int"
+			resultClass="LineItem">
+			select
+				LineItem_ID as Id,
+				LineItem_Code as Code,
+				LineItem_Quantity as Quantity,
+				LineItem_Price as Price
+			from LineItems where Order_ID = #value:Int32#
+		</statement>
+		
+		<statement id="GetLineItemsForOrderWithListClass"
+			parameterClass="int"
+			listClass="LineItemCollection"
+			resultClass="LineItem">
+			select
+				LineItem_ID as Id,
+				LineItem_Code as Code,
+				LineItem_Quantity as Quantity,
+				LineItem_Price as Price
+			from LineItems where Order_ID = #value:Int32#
+			order by LineItem_Code
+		</statement>
+		
+		<statement id="GetSpecificLineItem"
+					parameterClass="Hashtable"
+					resultClass="LineItem">
+			select
+				LineItem_ID as Id,
+				LineItem_Code as Code,
+				LineItem_Quantity as Quantity,
+				LineItem_Price as Price
+				from LineItems
+			where Order_ID = #Order_ID:Int32#
+				and LineItem_ID = #LineItem_ID:Int32#
+		</statement>
+		
+		<statement id="GetSpecificLineItemWithPicture"
+					parameterClass="Hashtable"
+					resultClass="LineItem">
+			select
+				LineItem_ID as Id,
+				LineItem_Code as Code,
+				LineItem_Quantity as Quantity,
+				LineItem_Price as Price,
+				LineItem_Picture as PictureData				
+				from LineItems
+			where Order_ID = #Order_ID:Int32#
+				and LineItem_ID = #LineItem_ID:Int32#
+		</statement>
+		
+		<select id="GetDynSpecificLineItem"
+			parameterClass="HashMap"
+			resultClass="LineItem">
+			select
+				LineItem_ID as Id,
+				LineItem_Code as Code,
+				LineItem_Quantity as Quantity,
+				LineItem_Price as Price
+				from LineItems
+			where Order_ID = #Order_ID:Int32#
+			<dynamic>
+				<isNotNull property="LineItem_ID">
+					and LineItem_ID = #LineItem_ID:Int32#
+				</isNotNull>
+			</dynamic>
+		</select>
+		
+		<statement id="GetSpecificLineItemWithNullReplacement"
+					parameterClass="int"
+					resultMap="LineItemWithNullReplacement">
+			select
+				LineItem_ID,
+				LineItem_Code,
+				LineItem_Quantity,
+				LineItem_Price
+				from LineItems
+				where LineItem_ID =  #value#
+		</statement>
+		
+		<statement id="InsertLineItem" 
+					parameterMap="insert-params" >
+			insert into LineItems
+			(LineItem_ID, Order_ID, LineItem_Code, LineItem_Quantity, LineItem_Price)
+			values
+			(?, ?, ?, ?, ?)
+		</statement>
+		
+		<statement id="InsertLineItemWithPicture" 
+					parameterMap="insert-params-picture" >
+			insert into LineItems
+			(LineItem_ID, Order_ID, LineItem_Code, LineItem_Quantity, LineItem_Price, LineItem_Picture)
+			values
+			(?, ?, ?, ?, ?, ?)
+		</statement>
+		
+		<!--
+		NOTE: Use parameterMaps to define parameter size 
+		when dealing with string parameters for ODP.NET!
+		-->
+		<insert id="InsertLineItemPostKey" parameterMap="insert-params">
+			insert into LineItems
+			(LineItem_ID, Order_ID, LineItem_Code, LineItem_Quantity, LineItem_Price)
+			values
+			(?, ?, ?, ?, ?)
+			<selectKey property="Id" type="post" resultClass="Int32" >
+				select 99 from LineItems where LineItem_ID = 1 and Order_ID=1
+			</selectKey>
+		</insert>	
+		
+		 <insert id="InsertLineItemPreKey" parameterMap="insert-params">
+			<selectKey property="Id" type="pre" resultClass="Int32" >
+				select 99 from LineItems where LineItem_ID = 1 and Order_ID=1
+			</selectKey>
+			insert into LineItems
+			(LineItem_ID, Order_ID, LineItem_Code, LineItem_Quantity, LineItem_Price)
+			values
+			(?, ?, ?, ?, ?)
+		</insert>
+  
+		<insert id="InsertLineItemNoKey" parameterMap="insert-params">
+			insert into LineItems
+			(LineItem_ID, Order_ID, LineItem_Code, LineItem_Quantity, LineItem_Price)
+			values
+			(?, ?, ?, ?, ?)
+		</insert>
+  
+  		<!-- JIRA 23 -->
+  		<!--
+  		Using ODP.NET 10.1
+  		Throws OracleException: SQL command not properly ended
+		at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure)
+		at Oracle.DataAccess.Client.OracleCommand.ExecuteNonQuery()
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteUpdate(IDalSession session, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 788
+		at IBatisNet.DataMapper.SqlMapper.Delete(String statementName, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\SqlMapper.cs:line 984
+		at IBatisNet.DataMapper.Test.NUnit.SqlMapTests.StatementTest.TestDeleteWithComments() in c:\projects\ibatis\asf\trunk\cs\mapper\ibatisnet.datamapper.test\nunit\sqlmaptests\statementtest.cs:line 1000
+  		
+  		Cannot run multiple statements through single command
+  		with ODP.NET provider
+  		-->
+		<delete id="DeleteWithComments" >
+			<!-- Delete LineItems -->
+			BEGIN delete from LineItems where Order_ID = 10;
+			<!-- Delete LineItems -->
+			delete from LineItems where Order_ID = 9; END;
+		</delete>    
+  
+  </statements>
+	
+
+  
+	<parameterMaps>   
+		
+		<parameterMap id="insert-params" class="LineItem">
+			<parameter property="Id" dbType="Int32" />
+			<parameter property="Order.Id" dbType="Int32" />
+			<parameter property="Code" dbType="Varchar2" size="32" />			
+			<parameter property="Quantity" dbType="Int32" />
+			<parameter property="Price" dbType="Decimal" precision="18" scale="2" nullValue="-99.99"/>
+		</parameterMap>
+				
+		<parameterMap id="insert-params-picture" class="LineItem">
+			<parameter property="Id" dbType="Int32" />
+			<parameter property="Order.Id" dbType="Int32" />
+			<parameter property="Code" dbType="Varchar2" size="32" />			
+			<parameter property="Quantity" dbType="Int32" />
+			<parameter property="Price" dbType="Decimal" precision="18" scale="2" nullValue="-99.99"/>
+			<parameter property="PictureData" dbType="Blob" size="4000"/>
+		</parameterMap>
+		
+	</parameterMaps>
+</sqlMap>

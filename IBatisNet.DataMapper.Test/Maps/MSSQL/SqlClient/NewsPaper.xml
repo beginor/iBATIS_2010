@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="NewsPaper"
+xmlns="http://ibatis.apache.org/mapping"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <alias>
+    <typeAlias alias="Document" type="IBatisNet.DataMapper.Test.Domain.Document, IBatisNet.DataMapper.Test" />
+    <typeAlias alias="Newspaper" type="IBatisNet.DataMapper.Test.Domain.Newspaper, IBatisNet.DataMapper.Test" />
+  </alias>
+
+  <resultMaps>
+
+    <resultMap id="baseDocument" class="Document">
+			<result property="Id"			column="Document_ID"/>
+			<result property="Title"		column="Document_Title"/>
+		</resultMap>
+
+    <resultMap id="newspaper" class="Newspaper"  extends="baseDocument">
+      <result property="City"	column="Document_City"/>
+    </resultMap>
+
+  </resultMaps>
+</sqlMap>

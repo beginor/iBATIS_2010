@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Simple"
+xmlns="http://ibatis.apache.org/mapping"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<alias>
+  <typeAlias alias="Simple" type="IBatisNet.DataMapper.Test.Domain.Simple, IBatisNet.DataMapper.Test"/>
+</alias>
+
+<statements>
+
+  <update id="UpdateSimple" parameterClass="Simple" >
+    update Simples
+    set
+    name = #Name#,
+    address = #Address#,
+    count = #Count#,
+    "date" = #Date#,
+    pay = #Pay#
+    where
+    id = #Id#
+  </update>
+
+
+  <delete id="DeleteSimple"  parameterClass="int">
+    delete Simples 
+    where
+    id = #value#
+  </delete>
+
+  <insert id="InsertSimple" parameterClass="Simple" >
+    insert into Simples ( name, address, count, "date", pay, id )
+    values
+    (#Name#, #Address#, #Count#, #Date#, #Pay#, #Id#)
+  </insert>
+
+</statements>
+</sqlMap>

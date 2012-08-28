@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<sqlMap namespace="Coupon"
+xmlns="http://ibatis.apache.org/mapping"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <alias>
+    <typeAlias alias="Coupon" type="IBatisNet.DataMapper.Test.Domain.Coupon, IBatisNet.DataMapper.Test" />
+  </alias>
+
+  <!-- If the type is not specified, ADO.NET infers the 
+			  data provider Type of the Parameter from the Value property 
+			  of the Parameter object. -->
+
+  <resultMaps>
+
+    <resultMap id="ResultMapCouponV1" class="Coupon" groupBy="Id">
+      <result property="Id" column="Coupon_Id" />
+      <result property="Code" column="Coupon_Code" />
+      <result property="BrandIds" resultMapping="Coupon.ResultMapCouponBrandId" />
+    </resultMap>
+
+    <resultMap id="ResultMapCouponV2" class="Coupon" groupBy="Id">
+      <result property="Id" column="Coupon_Id" />
+      <result property="Code" column="Coupon_Code" />
+      <result property="BrandIds" column ="Coupon_Id" select="GetBrand" />
+    </resultMap>
+
+    <resultMap id="ResultMapCouponBrandId" class="int">
+      <result property="value" column="BrandId" />
+    </resultMap>
+
+
+  </resultMaps>
+
+  <statements>
+
+  <select id="GetCouponBrand" resultMap="ResultMapCouponV1">
+    SELECT
+    cou.Coupon_Id ,
+    cou.Coupon_Code,
+    cou_b.Brand_Id AS BrandId
+    FROM Coupons AS cou
+    LEFT OUTER JOIN Coupons_Brands AS cou_b
+    ON cou.Coupon_Id = cou_b.Coupon_Id
+  </select>
+
+    <select id="GetCoupons" resultMap="ResultMapCouponV2">
+      SELECT
+      Coupon_Id ,
+      Coupon_Code
+      FROM Coupons 
+    </select>
+
+    <select id="GetBrand" parameterClass="int" resultClass="int">
+      SELECT
+      Brand_Id AS BrandId
+      FROM Coupons_Brands
+      Where Coupon_Id = #value#
+    </select>
+
+</statements>
+
+
+</sqlMap>

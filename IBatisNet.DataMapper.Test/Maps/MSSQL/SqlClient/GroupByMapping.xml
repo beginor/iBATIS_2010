@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="GroupByMapping"
+  xmlns="http://ibatis.apache.org/mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <alias>
+    <typeAlias alias="NCategory" type="IBatisNet.DataMapper.Test.Domain.Petshop.Category, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="NProduct" type="IBatisNet.DataMapper.Test.Domain.Petshop.Product, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="NItem" type="IBatisNet.DataMapper.Test.Domain.Petshop.Item, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="Application" type="IBatisNet.DataMapper.Test.Domain.Application, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="ApplicationUser" type="IBatisNet.DataMapper.Test.Domain.ApplicationUser, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="Role" type="IBatisNet.DataMapper.Test.Domain.Role, IBatisNet.DataMapper.Test"/>
+    <typeAlias alias="Address" type="IBatisNet.DataMapper.Test.Domain.Address, IBatisNet.DataMapper.Test"/>
+
+  </alias>
+
+  <resultMaps>
+
+    <resultMap id="Category-Result" class="NCategory" groupBy="Id">
+      <result property="Id" column="Category_Id"/>
+      <result property="Name" column="Category_Name"/>
+      <result property="Products" resultMapping="GroupByMapping.Product-Result"/>
+    </resultMap>
+
+    <resultMap id="CategoryGeneric-Result" class="NCategory" groupBy="Id">
+      <result property="Id" column="Category_Id"/>
+      <result property="Name" column="Category_Name"/>
+      <result property="GenericProducts" resultMapping="GroupByMapping.ProductGeneric-Result"/>
+    </resultMap>
+    
+    <resultMap id="Category-Result-Extended" class="NCategory" extends="Category-Result" >
+      <result property="Description" column="Category_Description"/>
+    </resultMap>
+    
+    <resultMap id="Product-Result" class="NProduct" groupBy="Id">
+      <result property="Id" column="Product_Id"/>
+      <result property="Name" column="Product_Name"/>
+      <result property="Items" resultMapping="GroupByMapping.Item-Result"/>
+    </resultMap>
+
+    <resultMap id="ProductGeneric-Result" class="NProduct" groupBy="Id">
+      <result property="Id" column="Product_Id"/>
+      <result property="Name" column="Product_Name"/>
+      <result property="GenericItems" resultMapping="GroupByMapping.Item-Result"/>
+    </resultMap>
+    
+    <resultMap id="Item-Result" class="NItem">
+      <result property="Id" column="Item_Id"/>
+      <result property="UnitCost" column="Item_UnitCost"/>
+      <result property="Status" column="Item_Status"/>
+    </resultMap>
+
+    <resultMap id="Order-GroupBy-Result" class="Order" groupBy="Id">
+      <result property="Id"         column="Order_ID"/>
+      <result property="City"       column="Order_City"/>
+      <result property="LineItemsIList" resultMapping="GroupByMapping.LineItem-GroupBy" />
+      <result property="Account" resultMapping="Account.account-result-nullable-email" />
+    </resultMap>
+
+    <resultMap id="LineItem-GroupBy" class="LineItem">
+      <result property="Id"			column="LineItem_ID"/>
+      <result property="Code"			column="LineItem_Code"/>
+      <result property="Quantity"		column="LineItem_Quantity"/>
+      <result property="Price"		column="LineItem_Price" />
+    </resultMap>
+
+    <resultMap id="categoryResultJIRA250" class="NCategory" groupBy="Id">
+      <result property="Id" column="Category_Id"/>
+      <result property="Name" column="Category_Name"/>
+      <result property="Products" resultMapping="GroupByMapping.productResultJIRA250"/>
+    </resultMap>
+
+    <resultMap id="productResultJIRA250" class="NProduct" groupBy="Id">
+      <result property="Id" column="Product_Id"/>
+      <result property="Name" column="Product_Name" />
+    </resultMap>
+
+    <resultMap id="ApplicationResultMap" class="Application" groupBy="Id">
+      <result property="Id" column="ApplicationId"/>
+      <result property="Name" column="ApplicationName"/>
+      <result property="DefaultRole" resultMapping="GroupByMapping.DefaultRoleResultMap"/>
+      <result property="Users" resultMapping="GroupByMapping.ApplicationUserResultMap"/>
+    </resultMap>
+
+    <resultMap id="ApplicationUserResultMap" class="ApplicationUser" groupBy="Id">
+      <result property="Id" column="UserId"/>
+      <result property="UserName" column="UserName"/>
+      <result property="Address" resultMapping="GroupByMapping.AddressResultMap"/>
+      <result property="IsActive" column="ActiveFlag"/>
+      <result property="Roles" resultMapping="GroupByMapping.RoleResultMap"/>
+    </resultMap>
+
+    <resultMap id="DefaultRoleResultMap" class="Role" >
+      <result property="Id" column="DefaultRoleId"/>
+      <result property="Name" column="DefaultRoleName"/>
+    </resultMap>
+
+    <resultMap id="RoleResultMap" class="Role" >
+      <result property="Id" column="RoleId"/>
+      <result property="Name" column="RoleName"/>
+    </resultMap>
+
+    <resultMap id="AddressResultMap" class="Address" >
+      <result property="Id" column="AddressId"/>
+    </resultMap>
+    
+  </resultMaps>
+
+  <statements>
+
+    <select id="GroupByBobHanson" resultMap="ApplicationResultMap" >
+		SELECT 
+			Applications.ApplicationId, Applications.ApplicationName, 
+			DefaultRole.RoleId as DefaultRoleId, DefaultRole.RoleName as DefaultRoleName, 
+			Users.UserId, Users.UserName,
+			Addresses.AddressId, 
+			ApplicationUsers.ActiveFlag,
+			Roles.RoleId, Roles.RoleName
+		FROM   Applications 
+		INNER JOIN Roles DefaultRole 
+			ON DefaultRole.RoleId = Applications.DefaultRoleId
+		INNER JOIN ApplicationUserRoles 
+			ON ApplicationUserRoles.ApplicationId = Applications.ApplicationId
+		INNER JOIN ApplicationUsers 
+			ON ApplicationUsers.ApplicationId = ApplicationUserRoles.ApplicationId AND ApplicationUsers.UserId = ApplicationUserRoles.UserId
+		INNER JOIN Users ON Users.UserId = ApplicationUsers.UserId
+		LEFT JOIN Addresses 
+			ON Addresses.AddressId = Users.AddressId
+		INNER JOIN Roles Roles
+			ON Roles.RoleId = ApplicationUserRoles.RoleId
+		WHERE  Applications.ApplicationName = 'Application Manager'
+    </select>
+
+    <select id="GetCategories" resultMap="Category-Result" >
+      SELECT     
+      c.Category_Id, c.Category_Name, 
+      p.Product_Id, p.Product_Name, 
+      i.Item_Id, i.Item_UnitCost, i.Item_Status, 
+      v.Inventory_Quantity
+      FROM         
+      Items i INNER JOIN
+      Products p ON i.Product_Id = p.Product_Id INNER JOIN
+      Inventories v ON i.Item_Id = v.Item_Id RIGHT OUTER JOIN
+      Categories c ON p.Category_Id = c.Category_Id
+    </select>
+    
+      <select id="GetAllCategories" resultMap="Category-Result" >
+      select
+      c.Category_Id, c.Category_Name,
+      p.Product_Id, p.Product_Name,
+      i.Item_Id, i.Item_UnitCost, i.Item_Status
+      from Categories c, Products p, Items i
+      where c.Category_Id = p.Category_Id
+      and p.Product_Id = i.Product_Id
+      order by c.Category_Id, p.Product_Id, i.Item_Id
+    </select>
+
+    <select id="GetAllCategoriesExtended" resultMap="Category-Result-Extended" >
+      select
+      c.Category_Id, c.Category_Name, c.Category_Description,
+      p.Product_Id, p.Product_Name,
+      i.Item_Id, i.Item_UnitCost, i.Item_Status,
+      v.Inventory_Quantity
+      from Categories c, Products p, Items i, Inventories v
+      where c.Category_Id = p.Category_Id
+      and p.Product_Id = i.Product_Id
+      and i.Item_Id = v.Item_Id
+    </select>
+
+    <select id="GetFish" resultMap="Category-Result" >
+      select
+      c.Category_Id, c.Category_Name,
+      p.Product_Id, p.Product_Name,
+      i.Item_Id, i.Item_UnitCost, i.Item_Status,
+      v.Inventory_Quantity
+      from Categories c, Products p, Items i, Inventories v
+      where c.Category_Id = p.Category_Id
+      and p.Product_Id = i.Product_Id
+      and i.Item_Id = v.Item_Id
+      and c.Category_Id = 'FISH'
+    </select>
+
+    <select id="GetFishGeneric" resultMap="CategoryGeneric-Result" >
+      select
+      c.Category_Id, c.Category_Name,
+      p.Product_Id, p.Product_Name,
+      i.Item_Id, i.Item_UnitCost, i.Item_Status,
+      v.Inventory_Quantity
+      from Categories c, Products p, Items i, Inventories v
+      where c.Category_Id = p.Category_Id
+      and p.Product_Id = i.Product_Id
+      and i.Item_Id = v.Item_Id
+      and c.Category_Id = 'FISH'
+    </select>
+    
+    <select id="GetAllProductCategoriesJIRA250" resultMap="categoryResultJIRA250" >
+      select
+      c.Category_Id, c.Category_Name,
+      null as Product_Id, null as Product_Name
+      from Categories c
+    </select>
+    
+    <!-- Ignore -->
+    <statement id="GetOrderLineItem"
+                resultMap="Order-GroupBy-Result" >
+      select
+      Orders.Order_ID,
+      Order_City,
+      LineItem_ID,
+      LineItem_Code,
+      LineItem_Quantity,
+      LineItem_Price,
+      Accounts.Account_Id,
+      Accounts.Account_FirstName,
+      Accounts.Account_LastName,
+      Accounts.Account_Email
+      FROM         Orders INNER JOIN
+      LineItems ON Orders.Order_ID = LineItems.Order_ID LEFT OUTER JOIN
+      Accounts ON Orders.Account_ID = Accounts.Account_ID
+      Order by Orders.Order_ID
+    </statement>
+    
+  </statements>
+  
+</sqlMap>

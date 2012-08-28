@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Nullable" 
+xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <alias>
+    <typeAlias alias="Nullable" type="IBatisNet.DataMapper.Test.Domain.NullableClass, IBatisNet.DataMapper.Test"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Nullable-result" class="Nullable">
+      <result property="Id" column="Id"/>
+      <result property="TestBool" column="TestBool" />
+      <result property="TestByte" column="TestByte" />
+      <result property="TestChar" column="TestChar" />
+      <result property="TestDateTime" column="TestDateTime" />
+      <result property="TestDecimal" column="TestDecimal" />
+      <result property="TestDouble" column="TestDouble" />
+      <result property="TestGuid" column="TestGuid"/>
+      <result property="TestInt16" column="TestInt16"/>
+      <result property="TestInt32" column="TestInt32"/>
+      <result property="TestInt64" column="TestInt64"/>
+      <result property="TestSingle" column="TestSingle" />
+    </resultMap>
+  </resultMaps >
+
+  <statements>
+
+    <select id="GetNullable" resultMap="Nullable-result" >
+      select
+        *
+      from Nullable
+      where Id = #value#
+    </select>
+
+
+    <select id="GetClassNullable" resultClass="Nullable" >
+      select
+      *
+      from Nullable
+      where Id = #value#
+    </select>
+    
+    <insert id="InsertNullable" parameterClass="Nullable" >
+      <selectKey property="Id" type="post" resultClass="int">
+        select SCOPE_IDENTITY() as value
+      </selectKey>
+      insert into Nullable
+      (TestBool, TestByte, TestChar, TestDateTime, TestDecimal, TestDouble, TestGuid, TestInt16, TestInt32, TestInt64, TestSingle)
+      values
+      (#TestBool#, #TestByte#, #TestChar#, #TestDateTime#, #TestDecimal#, #TestDouble#, #TestGuid#, #TestInt16#, #TestInt32#, #TestInt64#, #TestSingle#)
+    </insert>
+    
+  </statements>
+</sqlMap>

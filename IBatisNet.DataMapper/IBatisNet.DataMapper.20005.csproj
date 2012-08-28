@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F3E45F39-3224-4EAD-B138-EB5CC0E32824}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>IBatisNet.DataMapper</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>IBatisNet.DataMapper</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;dotnet2</DefineConstants>
+    <DocumentationFile>IBatisNet.DataMapper.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;dotnet2</DefineConstants>
+    <DocumentationFile>IBatisNet.DataMapper.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy">
+      <Name>Castle.DynamicProxy</Name>
+      <HintPath>..\External-Bin\Net\2.0\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\DataReaderDecorator.cs" />
+    <Compile Include="Commands\DataReaderTransformer.cs" />
+    <Compile Include="Commands\DbCommandDecorator.cs" />
+    <Compile Include="Commands\DefaultPreparedCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\IDbDataParameterCollection.cs" />
+    <Compile Include="Commands\InMemoryDataReader.cs" />
+    <Compile Include="Commands\IPreparedCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\PreparedCommandFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Alias\TypeAlias.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Alias\TypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\CacheKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\CacheModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\Fifo\FifoCacheController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\FlushInterval.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\ICacheController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\Lru\LruCacheController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\Memory\MemoryCacheControler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Cache\Memory\MemoryCacheLevel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\DomSqlMapBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ParameterMapping\InlineParameterMapParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ParameterMapping\ParameterMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ParameterMapping\ParameterProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ParameterMapping\ParameterPropertyCollection.cs" />
+    <Compile Include="Configuration\ResultMapping\ArgumentProperty.cs" />
+    <Compile Include="Configuration\ResultMapping\AutoResultMap.cs" />
+    <Compile Include="Configuration\ResultMapping\Discriminator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ResultMapping\IResultMap.cs" />
+    <Compile Include="Configuration\ResultMapping\NullResultMap.cs" />
+    <Compile Include="Configuration\ResultMapping\ResultMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ResultMapping\ResultMapCollection.cs" />
+    <Compile Include="Configuration\ResultMapping\ResultProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\ResultMapping\ResultPropertyCollection.cs" />
+    <Compile Include="Configuration\ResultMapping\SubMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ArgumentPropertyDeSerializer.cs" />
+    <Compile Include="Configuration\Serializers\CacheModelDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\DeleteDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\DeSerializerFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\DiscriminatorDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\DynamicDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\InsertDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsEmptyDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsEqualDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsGreaterEqualDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsGreaterThanDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsLessEqualDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsLessThanDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNotEmptyDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNotEqualDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNotNullDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNotParameterPresentDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNotPropertyAvailableDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsNullDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsParameterPresentDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IsPropertyAvailableDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\IterateSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ParameterMapDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ParameterPropertyDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ProcedureDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ResultMapDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\ResultPropertyDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\SelectDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\SqlDeSerializer.cs" />
+    <Compile Include="Configuration\Serializers\StatementDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\SubMapDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\TypeAliasDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\TypeHandlerDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Serializers\UpdateDeSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\DynamicSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\BaseTag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\Conditional.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\Dynamic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IDynamicParent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsEmpty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsEqual.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsGreaterEqual.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsGreaterThan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsLessEqual.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsLessThan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNotEmpty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNotEqual.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNotNull.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNotParameterPresent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNotPropertyAvailable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsNull.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsParameterPresent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\IsPropertyAvailable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\Iterate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Elements\SqlTag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\BaseTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\ConditionalTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\DynamicTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsEmptyTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsEqualTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsGreaterEqualTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsGreaterThanTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsLessEqualTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsLessThanTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNotEmptyTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNotEqualTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNotNullTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNotParameterPresentTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNotPropertyAvailableTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsNullTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsParameterPresentTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IsPropertyAvailableTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\ISqlTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IterateContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\IterateTagHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\Handlers\SqlTagContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\ISqlChild.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Dynamic\SqlText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\ISql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\SimpleDynamic\SimpleDynamicSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Static\ProcedureSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Sql\Static\StaticSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Delete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Generate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Insert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\IStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\PreparedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\PreparedStatementFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Procedure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Select.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\SelectKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\SqlGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Statement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Statements\Update.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataExchange\BaseDataExchange.cs" />
+    <Compile Include="DataExchange\ComplexDataExchange.cs" />
+    <Compile Include="DataExchange\DataExchangeFactory.cs" />
+    <Compile Include="DataExchange\DictionaryDataExchange.cs" />
+    <Compile Include="DataExchange\DotNetObjectDataExchange.cs" />
+    <Compile Include="DataExchange\IDataExchange.cs" />
+    <Compile Include="DataExchange\ListDataExchange.cs" />
+    <Compile Include="DataExchange\PrimitiveDataExchange.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Enumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\DataMapperException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExecuteEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ISqlMapper.cs" />
+    <Compile Include="ISqlMapSession.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\ArgumentStrategyFactory.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\DefaultStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\IArgumentStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\ResultMapStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\SelectArrayStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\SelectGenericListStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\SelectListStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\SelectObjectStrategy.cs" />
+    <Compile Include="MappedStatements\ArgumentStrategy\SelectStrategy.cs" />
+    <Compile Include="MappedStatements\BaseStrategy.cs" />
+    <Compile Include="MappedStatements\CachingStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\DeleteMappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\IMappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\InsertMappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\MappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\PaginatedList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\PostBindind.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\ArrayStrategy.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\GenericListStrategy.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\IPostSelectStrategy.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\ListStrategy.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\ObjectStrategy.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\PostSelectStrategyFactory.cs" />
+    <Compile Include="MappedStatements\PostSelectStrategy\StrongTypedListStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\DefaultStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\GroupByStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\IPropertyStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\PropertyStrategyFactory.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\ResultMapStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\SelectArrayStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\SelectGenericListStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\SelectListStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\SelectObjectStrategy.cs" />
+    <Compile Include="MappedStatements\PropertStrategy\SelectStrategy.cs" />
+    <Compile Include="MappedStatements\ReaderAutoMapper.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\AutoMapStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\DictionaryStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\GroupByStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\IResultStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\ListStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\MapStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\ObjectStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\ResultClassStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\ResultMapStrategy.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\ResultStrategyFactory.cs" />
+    <Compile Include="MappedStatements\ResultStrategy\SimpleTypeStrategy.cs" />
+    <Compile Include="MappedStatements\SelectMappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MappedStatements\UpdateMappedStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Proxy\ILazyFactory.cs" />
+    <Compile Include="Proxy\LazyFactoryBuilder.cs" />
+    <Compile Include="Proxy\LazyList.cs" />
+    <Compile Include="Proxy\LazyListFactory.cs" />
+    <Compile Include="Proxy\LazyListGeneric.cs" />
+    <Compile Include="Proxy\LazyListGenericFactory.cs" />
+    <Compile Include="Proxy\LazyLoadInterceptor.cs" />
+    <Compile Include="Proxy\LazyLoadProxyFactory.cs" />
+    <Compile Include="Scope\ConfigurationScope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scope\ErrorContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scope\IScope.cs" />
+    <Compile Include="Scope\RequestScope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SessionStore\AbstractSessionStore.cs" />
+    <Compile Include="SessionStore\CallContextSessionStore.cs" />
+    <Compile Include="SessionStore\HybridWebThreadSessionStore.cs" />
+    <Compile Include="SessionStore\ISessionStore.cs" />
+    <Compile Include="SessionStore\SessionStoreFactory .cs" />
+    <Compile Include="SessionStore\WebSessionStore.cs" />
+    <Compile Include="SqlMapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SqlMapSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\AnsiStringTypeHandler.cs" />
+    <Compile Include="TypeHandlers\BaseTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\BooleanTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ByteArrayTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ByteTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\CharTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\CustomTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\DateTimeTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\DBNullTypeHandler.cs" />
+    <Compile Include="TypeHandlers\DecimalTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\DoubleTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\EnumTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\GuidTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\Int16TypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\Int32TypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\Int64TypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\IParameterSetter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\IResultGetter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ITypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ITypeHandlerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\Nullables\NullableBooleanTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableByteTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableCharTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableDateTimeTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableDecimalTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableDoubleTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableGuidTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableInt16TypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableInt32TypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableInt64TypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableSByteTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableSingleTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableTimeSpanTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableUInt16TypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableUInt32TypeHandler.cs" />
+    <Compile Include="TypeHandlers\Nullables\NullableUInt64TypeHandler.cs" />
+    <Compile Include="TypeHandlers\ObjectTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ParameterSetterImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\ResultGetterImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\SByteTypeHandler.cs" />
+    <Compile Include="TypeHandlers\SingleTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\StringTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\TimeSpanTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\TypeHandlerFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeHandlers\UInt16TypeHandler.cs" />
+    <Compile Include="TypeHandlers\UInt32TypeHandler.cs" />
+    <Compile Include="TypeHandlers\UInt64TypeHandler.cs" />
+    <Compile Include="TypeHandlers\UnknownTypeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="ChangeLog.txt" />
+    <Content Include="licence.txt" />
+    <Content Include="notice.txt" />
+    <Content Include="ReadMe.txt" />
+    <None Include="IBatisNet.DataMapper.build" />
+    <None Include="MappedStatements\ResultStrategy\ClassDiagram.cd" />
+    <EmbeddedResource Include="SqlMap.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SqlMapConfig.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IBatisNet.Common\IBatisNet.Common.2005.csproj">
+      <Project>{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}</Project>
+      <Name>IBatisNet.Common.2005</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="ConstructorInjection" 
+xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+		<typeAlias alias="ImmutableCategory" type="IBatisNet.DataMapper.Test.Domain.ImmutableCategory, IBatisNet.DataMapper.Test"/>
+		<typeAlias alias="ImmutableCategoryPropertyContainer" type="IBatisNet.DataMapper.Test.Domain.ImmutableCategoryPropertyContainer, IBatisNet.DataMapper.Test"/>
+	</alias>
+
+	<resultMaps>
+
+		<resultMap id="ImmutableCategory-result" class="ImmutableCategory">
+			<constructor>
+				<argument argumentName="id" column="Category_Id"/>
+				<argument argumentName="name"  column="Category_Name"/>
+				<argument argumentName="guid" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000"/>
+			</constructor>
+		</resultMap>
+
+		<resultMap id="ImmutableCategoryPropertyContainer-result" class="ImmutableCategoryPropertyContainer">
+			<result property="ImmutableCategory" resultMapping="ConstructorInjection.ImmutableCategory-result"/>
+		</resultMap>
+	</resultMaps >
+
+	<statements>
+
+		<select id="GetImmutableCategoryInContainer" parameterClass="int" resultMap="ImmutableCategoryPropertyContainer-result">
+			select *
+			from Categories
+			where Category_ID = #value#
+		</select>
+    
+	</statements>
+</sqlMap>

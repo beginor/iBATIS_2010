@@ -1,0 +1,414 @@
+IBatisNet Change Log
+
+------------------------------
+1.6.1 - 01/March/2007 BETA 
+------------------------------
+Issues
+- IBATISNET-212 FIXED  Add the ability to track Open Transactions via IDalSession      
+- IBATISNET-210 FIXED  Finding properties on interfaces which "inherites" other interfaces      
+- IBATISNET-206 FIXED  groupBy incorrectly handles left outer join results where right part is empty      
+- IBATISNET-207 FIXED  Typos in documentation section 3.5.2.4      
+- IBATISNET-209 FIXED  Improved verification on groupBy process configuration  
+ 
+------------------------------
+1.6.0 - 01/Feb/2007 BETA 
+------------------------------
+Issues
+- IBATISNET-204 : DataMapper SqlMap.xsd SqlMap elements order 
+- IBATISNET-202 : QueryForDictionary does not process select property
+- IBATISNET-198 : Cache key for accessors can be ambiguous and can cause cast exceptions  
+- IBATISNET-193 : Implement N+1 Select resolution with groupBy attribute 
+- IBATISNET-191 : Allows Cache for Procedure / Statement tag
+- IBATISNET-189 : Missing Typehandler for nullable timespan  
+- IBATISNET-188 : MethodAccessException in emitted code  
+- IBATISNET-186 : Fix select on argument property on constructor tag  
+- IBATISNET-184 : Invalid support for public/protected field in result property
+- IBATISNET-182 : Allow lazy load on simple class
+- IBATISNET-179 : Allow procedure statement without parameterMap  
+- IBATISNET-178 : ConfigWatcherHandler does not wok with the changes of DataMaps files   
+- IBATISNET-116 : Add support for iBATIS for Java's <include> tag in sql map files.  
+- IBATISNET-104 : QueryForXXX do not check cache before opening/closing connection  
+
+
+Improvements/Changes
+- IBATISNET-199 : Add support for QueryForObject and GroupBy  
+- IBATISNET-196 : Improved stored procedure parameters analysis
+- IBATISNET-192 : Add support for IDictionary<K, V> QueryForDictionary<K, V>(...)
+- IBATISNET-185 : Allow custom ISessionStore
+- IBATISNET-181 : Allow mapping of multiple resulSet
+- IBATISNET-180 : Extends use of ISqlMapper in DataMapper + allow use of a custom ISqlMapper
+
+- Remove obsoletes methods on SqlMapper : Configure(XmlDocument document), Configure(), Configure(string resource), 
+		ConfigureAndWatch(ConfigureHandler configureDelegate), ConfigureAndWatch(string resource, ConfigureHandler configureDelegate)
+- Mark QueryForPaginatedList as Obsolete on SqlMapper
+
+------------------------------
+1.5.1 - 10/08/2006 GA
+------------------------------
+Issues
+- IBATISNET-176 : Issue with resultMapping & constructor injection  
+- IBATISNET-175 : Support discriminators when used via the "resultMapping" attribute  
+- IBATISNET-174 : Issue with a result map constructor in a result property  
+- IBATISNET-173 : Issue with constructor tag where an argument use another constructor tag  
+- IBATISNET-172 : Issue with QueryForList with constructor resultMap and select argument  
+- IBATISNET-170 : auto-result-map Bug  
+- IBATISNET-169 : SqlMap.xsd Correction   
+- IBATISNET-168 : The parameter class reflection does not work anymore  
+
+Improvements/Changes
+- IBATISNET-167 : Update nunit to last stable version 2.2.8 
+
+------------------------------
+1.5 - 05/07/2006 BETA
+------------------------------
+Issues
+- IBATISNET-163 : Missing datatype can throw null pointer exception 
+- IBATISNET-158 : Add support for generic type in TypeAssemblyInfo
+- IBATISNET-151 : Pre-load stored procedure parameters should use the already-open connection 
+- IBATISNET-145 : Make NoOpLoggerFA the default logger when logging config is missing or malformed. Allow FactoryAdapter to be set by the application
+- IBATISNET-143 : Allow selectKey node to process dynamic sql  
+- IBATISNET-141 : DataMapper Developer Guide document bug  
+- IBATISNET-139 : DBNull.Value as parameter object raises NullReferenceException in UnknownTypeHandler  
+- IBATISNET-138 : QueryForMap with cache Bug/Regression  
+- IBATISNET-137 : TypeHandlers for "System.Nullable(Of" fails with custom types  
+
+Improvements/Changes
+- IBATISNET-165 : Getting return value generatedKeys from stored procedures in inserts 
+- IBATISNET-162 : Ability to override the default result object creation mechanism 
+- IBATISNET-161 : Update log4net to last stable version 1.2.10 
+- IBATISNET-156 : Added support for MARS  
+				  Added allowMARS attribute on provider tag (used by SqlServer 2005, PostgreSQL).
+- IBATISNET-155 Allow Constructor Initialization on resultMap 
+  use
+  <resultMap id="account-result-constructor" class="Account" > 
+        <constructor> 
+              <argument argumentName="id" column="Account_ID"/> 
+              <argument argumentName="firstName" column="Account_FirstName"/> 
+              <argument argumentName="lastName" column="Account_LastName"/> 
+       </constructor> 
+       <result property="EmailAddress" column="Account_Email" nullValue="no_email@provided.com"/> 
+       <result property="BannerOption" column="Account_Banner_Option" dbType="Varchar" type="bool"/> 
+        <result property="CartOption" column="Account_Cart_Option" typeHandler="HundredsBool"/> 
+  </resultMap> 
+
+- IBATISNET-153 Supporting private field accessor
+- IBATISNET-147 : Emitted types for populating and instantiating result  
+				  Added useReflectionOptimizer attribut setting in SqlMap.config
+- IBATISNET-105 : Added Lazy load support for Strong typed collections
+- Added ISqlMapper interface to simplify mock or stub
+- Added support for readOnly & serialize attribut on CacheModel
+- Added class attribute to parameterMap tags [it is recommended !]
+- Added Support for nullable type in .NET V2
+- Added Support for .NET V2 and Generic
+	
+	public T QueryForObject<T>(string statementName, object parameterObject);
+	public T QueryForObject<T>(string statementName, object parameterObject, T instanceObject);
+	
+	public IList<T> QueryForList<T>(string statementName, object parameterObject);
+	public IList<T> QueryForList<T>(string statementName, object parameterObject, int skipResults, int maxResults);
+	public void QueryForList<T>(string statementName, object parameterObject, IList<T> resultObject);
+	
+	public IList<T> QueryWithRowDelegate<T>(string statementName, object parameterObject, RowDelegate<T> rowDelegate);
+	
+	[also support object with generic list propertie Order{public IList<LineItem> LineItemsGenericList{...}};]
+
+------------------------------
+1.3 - 15/12/2005
+------------------------------
+- - Added support for Implicit Result Maps as
+    <result property='author.firstName’ column=”Persons.FirstName”/>
+or
+   SELECT    Persons.FirstName as 'author.firstName’
+- Added support to relation 1:0
+- Updated to log4net V1.2.9
+- Updated to Castle.DynamicProxy V1.1.5.0
+- Re-add signing on assembly 
+- Added custom logger support (removed dependency on log4net), iBATIS now needs a custom section in your application config file
+    Example (for log4NET) :
+	<configSections>
+		<sectionGroup name="iBATIS">
+			<section name="logging" type="IBatisNet.Common.Logging.Impl.LocationInfoLog4NetLoggerFA, IBatisNet.Common.Logging.Log4Net" />
+		</sectionGroup>	
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+	</configSections>	
+	<iBATIS>
+		<logging>		
+			<logFactoryAdapter type="IBatisNet.Common.Logging.Impl.Log4NetLoggerFA, IBatisNet.Common.Logging.Log4Net">
+				<arg key="configType" value="inline" />
+			</logFactoryAdapter>
+		</logging>
+	</iBATIS>
+	<log4net>
+		...
+	</log4net>
+	
+- Removes use of Xml serilization for loading config, boost init
+- Improved caching process & performance
+- Corrected issue with flushOnExecute statements being from other namespaces
+- Allow CacheModels, ResultMaps, and ParameterMaps to be in their own seperate files
+- Fixed IBATISNET-58 Allow all attributes in SqlMap.config file to be aware of ${xyz} properties
+- Fixed IBATISNET-97 Improved support for caching null results
+- Fixed IBATISNET-96 Added Informix .NET Provider 2.81 support (Anderson Gomes)
+- Fixed IBATISNET-94 Issue with DaoManager init
+- Fixed IBATISNET-92 Check selectKey's property attribute for writeability during mapper initialization
+- Fixed IBATISNET-91 Added Cache flush on ExecuteQueryForObject
+- Fixed IBATISNET-82 Added DomDaoManagerBuilder.Configure(XmlDocument document) 
+- Fixed IBATISNET-77 Allow Intellisense in Visual Studio 2003 for SqlMap/SqlMap.config files 
+- Updated schemas header
+  SqlMap.config
+  <sqlMapConfig xmlns=”http://ibatis.apache.org/dataMapper” 
+                xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance”>
+  Mapping files
+  <sqlMap namespace=”Product” xmlns=”http://ibatis.apache.org/mapping” 
+          xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance”>
+  Providers.config
+  <providers xmlns="http://ibatis.apache.org/providers" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+------------------------------
+1.2.1 - 10/07/2005
+------------------------------
+- Added new DomSqlMapBuilder constructor DomSqlMapBuilder(bool validateSqlMapConfig)
+- Exchange order of settings and properties tag in config file
+- Add new API to DomSqlMapBuilder.Configure(...)[old API SqlMapper.Configure(...) are marked as obsolete]
+- Re-Add providers tag (optional) in SqlMap.Config
+- Updated to Castle.DynamicProxy V1.1.0.0
+- Impoved logging JIRA-35
+- Added support to validate SqlMap.config (automatic) and mapping file (manual) via setting tag (<setting validateSqlMap="false"/>)
+- Fixed grammar typo (JIRA-36, JIRA-40, JIRA-41, JIRA-44, JIRA-61, JIRA-64)
+- Added support for custom type handler
+- Added typeHandler attribute to result-property and parameter-property tags
+- Added <discriminator> and <subMap> tags for class inheritance support
+- Added nunit category 'NHibernate'
+- Fixed Oracle issues (JIRA-27, JIRA-54, JIRA-56, JIRA-57)
+- Improvement JIRA-75/63
+<properties> 
+     <property resource="sqlmap-config.xml"/> 
+     <property resource="${root}Resources/Query/database.xml"/> 
+     <property key="Hello" value="World" /> ( To resolve IBATISNET-63 ) 
+ <properties> 
+ 
+- Fixed JIRA-70 Passed inner exception when re-throwing when init provider
+- Fixed JIRA-69 Added support for global setting in ressource and url attribute
+- Fixed JIRA-68 Improved logging message fpr TypeHandler Configuration
+- Fixed JIRA-66 #value# moniker not recognized when called something else like #ProductId# 
+- Fixed JIRA-60 QueryForMap not calling session.CloseConnection() correctly 
+- Fixed JIRA-51 If a <statement> has a "cacheModel" attribute set and cacheModelsEnabled="false" in SqlMap.config, an DataMapperException is thrown 
+- Fixed JIRA-49 Exceptions such as NotSupportedException not handled gracefully in CreateParametersForStatementText() 
+- Fixed JIRA-47/48/49 providers.config Assumes Types Are In The Same Assembly
+- Fixed JIRA-45 Unable to reference result maps defined in other xml files when useStatementNamespaces is set to true
+- Fixed JIRA-43 IBatisNet.sln contains a reference to a non-existant project: "IBatisNet.Test" 
+- Fixed JIRA-42 Build 1.1.458.0 doesn't automatically map .Net's bool to Sql Server 2000's Bit column type like previous builds did. 
+- Fixed JIRA-38 ParseGlobalProperties raises NullReferenceException if optional "properties" element is missing from sqlmap config file 
+- Fixed JIRA-37 An exception is thrown when a file watch is applied to an embedded resource 
+- Fixed JIRA-34 SqlMapSession's OpenConnection writes log message in "if" statement but not in "else if" statement 
+- Fixed JIRA-33 SqlMapSession's OpenConnection writes log message in "if" statement but not in "else if" statement 
+- Fixed JIRA-32 Improve how CloseConnection() tests for closeable connection 
+- Fixed JIRA-30 bug in when referencing a parameter more than once
+- Fixed JIRA-29 Pound signs not handled correctly 
+- Fixed JIRA-26 Unhandled NullReference parsing non-existent properties. 
+- Fixed JIAR-25 Error applying ResultMap when using 'Guid' in resultClass
+- Fixed JIRA-24 GUID TypeResolving misconfigured
+- Fixed JIRA-23 Add ability to preserve newlines within statement bodies. 
+- Fixed JIRA-22 statements containing undefined global properties silently fail 
+- Fixed JIRA-21 Property substitutions do not occur inside <selectKey> statement 
+- Fixed JIRA-20 Type problems when applying parameters.
+
+------------------------------
+1.1.458 Alpha- 12-jan-2005
+------------------------------
+- Added type (a CLR type) attribut in result and parameterMap element.
+- Patch from Luke Yang
+- Updated schema.
+- Added explicit open/close connection for DataAccess framework.
+- Added support for NHibernate in DataAccess framework
+- Added optional tag 'daoSessionHandlers' in dao.config to support new session handler (NHibernate)
+- Changed 'name' attribut on 'context' tag to 'id' (dao.config)
+- Changed 'name' attribut on 'daoSessionHandler' tag to 'id' (dao.config)
+- Fixed JIRA IBATISNET-13
+- Used Castle.DynamicProxy 1.0.3 for proxy.
+- Fixed JIRA IBATISNET-12
+- Added Unit Test for multiple/nested DAO Manager
+- Added Xml Comment
+- Fixed possible issue in ApplyParameterMap (https://sourceforge.net/forum/message.php?msg_id=2841897)
+- Added support for C# using syntax in DataAccess/DataMapper
+       * using ( SqlMapSession session = daoManager.OpenConnection() )
+			{
+			   ...db operations...
+			}
+       * using ( SqlMapSession session = daoManager.BeginTransaction() )
+			{
+			   ...db operations...
+			   session.Complete(); // Commit
+			}
+	   * using ( SqlMapSession session = sqlMap.OpenConnection() )
+			{
+			   ...db operations...
+			}
+       * using ( SqlMapSession session = sqlMap.BeginTransaction() )
+			{
+			   ...db operations...
+			   session.Complete(); // Commit
+			}			
+- Added support for Distributed Transaction à la Indigo with TransactionScope object 
+  in iBATIS.Common.Transaction (see Unit test in CommonTests.Transaction  for usage)
+       using (TransactionScope tx = new TransactionScope())
+			{
+			    // Open connection to database 1
+                // Transaction will be automatically enlist into it
+                // Execute update in database 1
+
+               // Open connection to database 2
+               // Transaction will be automatically enlist into it
+               // Execute update in database 2
+               
+               // Open a MessageQueue
+               // Transaction will be automatically enlist into it
+               // Post message
+
+              // the following code will be executed only if no exception
+              // occured in the above code; since we got here ok, let's vote for commit;
+              // in most if not all of the cases, this last line will be the same as below
+			   tx.Complete(); 
+			}
+			// when “using” call Dispose on the transaction scope at the end
+			// of the “using” code block, the "ambient" transaction will be commited only and only if
+			// the Complete method have been called.
+
+
+	Only supported in
+	    - XP SP2 (or higher) 
+	    - Windows Server 2003 
+	    - XP SP1 + Hotfix 828741 
+	and only in .Net 1.1.
+	It CAN'T be used on Windows 2000.	
+	
+	Don't support nested TransactionScope.	
+- Fixed bug for dynamic element isNotEqual (detected by Anders)
+- Fixed possible issue in SessionContainer
+- Refactoring of DaoSession
+- Removed 'static' usage in DomDaoManagerBuilder
+- Added support for embedded resource : only tag <properties ...>
+  <properties embedded="database.config, IBatisNet.Test"/>
+  and tag <sqlMap ...>
+  <sqlMap embedded="Account.xml, IBatisNet.Test"/> 
+  will support it. Syntax for embedded attribut
+  'file name, the name of the assembly which contains the embedded resource'
+- Removed 'assembly' attribut on <daoFactory> element of Dao.Config
+  the implementation structure attribut of <dao> element become the namespace-qualified name of the class is specified, followed by a comma, followed by (at a bare minimum) the name of the assembly that contains the class.
+- Removed 'static' usage in DomSqlMapBuilder
+- Moved Alias management to IBatisNet.Common.Utilities
+- Fixed request support 1032436, ByteArrayTypeHandler misses the last byte
+- Fixed support request 1050704, Unable to use <selectKey> with useStatementNamespaces=true
+- Added 'extends' attribute on statement, see Unit tests TestExtends*
+- Improved configuration building
+- Fixed issue on cache initialization
+
+------------------------------
+1.0.1 Alpha- 18/10/2004
+------------------------------
+- Used Apache.Avalon.DynamicProxy.dll for proxy.
+- Fixed support request 1045775, Connection management : ThreadStatic under asp.net
+- Marked property 'assembly' on typeAlias XML element as obsolete, the type attribut structure become the namespace-qualified name of the class is specified, followed by a comma, followed by (at a bare minimum) the name of the assembly that contains the class.
+  Exemple : type="IBatisNet.Test.Domain.Order, IBatisNet.Test"
+- Cleaning code, added comments
+- Fixed support request 1043181, NUNit test TestInsertOrderViaExtendParameterMap
+- TypeAlias refactoring, added a cache (improved perf from near 15%) 
+- Used NUnit 2.2 to test
+- Removed signing on assembly 
+
+------------------------------
+1.0.0 Alpha- 07/10/2004
+------------------------------
+- dao.config, sqlMap.config, providers.config must be place in the base directory of the application domain (same dir as app.config or web.config)
+- removed tag 'providers' from config file.
+- Rethink 'url', 'resource' notion (resource are loaded from the root directory of the application (relative path), url are valid path file:///c:/config/my.properties)
+- Fixed Support Request 1032436 (ByteArrayTypeHandler misses the last byte)
+- Fixed Support Requests 1007388 (SelectKey ignores namespace)
+- Added 'url', 'resource' notion as in iBatis Java 
+- Changed 'file' attribute from <sqlMap ... > tag to 'resource' name. 
+- Added <generate > tag in statement tag <insert>, <delete>, <update>, <select> for simplified support for CRUD (see category.xml in NUnit test)
+- Added BeginTransaction(IsolationLevel isolationLevel)
+- Renamed SelectKeyStatement.cs in SelectKey.cs.
+- In Providers.cs, renamed GetConnnection to GetConnection.
+- In SqlMap, added 'extends' attribute to 'parameterMap' tag with NUnit test (see category test).
+- In type cache, renamed 'Weack' type to 'Weak'
+- In SqlMap, added global element <alias>. Same purpose as SqlMapConfig alias.
+- In SqlMap, added <properties /> element to define an optional properties file.
+- In SqlMapConfig, added an enclosing element <database> for <provider /> and <datasource />.
+- In iBatisNet.DataMapper, added Mapper object (a singleton to access the SqlMapper defined by the SqlMap.Config)
+- In ExecuteQueryList, added support for OutputParameters for strongly typed collection.
+- In SqlMap, rename attribute 'name' to 'namespace'. 
+- In typeAlias element, Renamed attribute 'class' to 'type' (SqlMap and SqlMapConfig).
+- In typeAlias element, Renamed attribute 'name' to 'alias' (SqlMap and SqlMapConfig).
+- In SqlMapConfig, removed <datasources> since only one dataSource element can be declared.
+- In SqlMapConfig, rename <setting useFullyQualifiedStatementNames=... to <setting useStatementNamespaces=...
+- In IBatisNet.DataMapper rename SqlMap class to SqlMapper class. SqlMap is the object graph. SqlMapper is the object which exposes SqlMap.
+- In SqlMap, rename attribute 'name' to 'id' on resultMap, parameterMap, and statement elements.
+- Removed Nausicaa references
+- Renamed DaoException to DataAccessException
+- Renamed SqlMapException to DataMapperException 
+- Fixed bug in Dynamic sql elements
+- Replaced Proxy generation code with Avalon code
+- Added Unit test for Proxy
+
+
+------------------------------
+ 0.9.0 - 21/06/2004
+------------------------------
+- Added Fix in PreparedStatementFactory for ByteFx.MySql provider
+- Corrected Bug in sqlMap.Delete
+- Implemented PaginatedList
+- Added support for byte array type property.
+- Added support for Enum type property.
+- Removed requirement for daoSessionHandlers tag in dao.config
+- Added providers tag in SqlMap.Config
+- Changed name for IBatisNet.
+- Splitted main dll in three : 
+    IBatisNet.Common.dll for common API.
+    IBatisNet.DataAccess.dll for DAO API.
+    IBatisNet.DataMapper.dll for Mapper API.      
+- Passed all Unit tests for provider SqlClient, OleDb, ObDc (which was not the case for older version
+  because config was incorrect).
+- Internal refactoring for support dynamic sql.
+- Added support for Dynamic Sql.
+- Improved overall performance.
+- Added more NUnit tests.
+- Added comment.
+- Fixed bugs for OleDb, ObDc provider
+- Fixed other bugs
+
+------------------------------
+ 0.8.9 - -
+------------------------------
+ - Added comment
+ - Corrected bug 
+ - Added ConfigureAndWatch which monitor configuration files
+ - Added tests for input, output parameter via hashtable in procedure call
+ - Added examples for web and windows application
+ - Added concurrency exception if no record was affected on update
+ - Various minor code cleanups
+
+ 
+------------------------------
+ 0.8.7 - 31/03/2004
+------------------------------
+ - Added cache implementation (LRU,FIFO, Memory)
+ - Improved support for OLEDB, OBDC (All Unit tests are runned for Oldb or Obdc)
+ - Added more tests
+ - Improved/Cleaned code
+ - Added useParameterPrefixInSql, useParameterPrefixInParameter attribut on provider
+ - Completed schemas
+
+ 
+------------------------------
+ 0.8.5 - 11/03/2004
+------------------------------
+ - Added optional Lazy Loading of IList properties (default=false)
+ - Added generated selectKey element in insert statement
+ - Added more tests
+ 
+------------------------------
+ 0.8.0 - 26/02/2004
+------------------------------
+ - First release

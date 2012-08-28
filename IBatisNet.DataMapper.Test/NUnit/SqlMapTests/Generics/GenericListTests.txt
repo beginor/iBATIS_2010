@@ -1,0 +1,88 @@
+Tests
+
+Interface tests
+1) IList<LineItem> (Order.LineItemsGenericList) <--- QueryForList<LineItem>
+2) IList<LineItem> (Order.LineItemsGenericList) <--- QueryForList<LineItem> Lazy load
+3) IList<LineItem> (Order.LineItemsGenericList) <--- QueryForList<LineItem> with listClass = LineItemCollection2
+4) IList<LineItem> (Order.LineItemsGenericList) <--- QueryForList<LineItem> with listClass = LineItemCollection2 lazy
+
+Strongly typed collection tests
+5) LineItemCollection2 (Order.LineItemCollection2) <--- QueryForList<LineItem> with listClass = LineItemCollection2
+6) LineItemCollection2 (Order.LineItemCollection2) <--- QueryForList<LineItem>  with listClass = LineItemCollection2 Lazy load
+
+1/
+
+<resultMap id="order-with-generic-list-lineitem" class="Order" 
+	extends="lite-order-result-by-name" >
+	<result property="LineItemsGenericList" column="Order_ID" select="GetLineItemsForOrder" />
+</resultMap>
+
+<statement id="GetOrderWithGenericListLineItem"
+  parameterClass="Integer"
+  resultMap="order-with-generic-list-lineitem" >
+	select * from Orders where Order_ID = #value#
+</statement>
+
+2/
+
+<resultMap id="order-with-generic-lazy-load" class="Order" 
+      extends="lite-order-result-by-name" >
+      <result property="LineItemsGenericList" lazyLoad="true" column="Order_ID" select="GetLineItemsForOrder" />
+</resultMap>
+
+
+<statement id="GetOrderWithGenericLazyLoad"
+	parameterClass="Integer"
+	resultMap="order-with-generic-lazy-load" >
+	select * from Orders where Order_ID = #value#
+</statement>
+
+3/
+
+<resultMap id="order-with-generic-collection-lineitem" class="Order" 
+		extends="lite-order-result-by-name" >
+	<result property="LineItemsGenericList" column="Order_ID" select="GetLineItemsForOrderWithListClass" />
+</resultMap>
+
+<statement id="GetOrderWithGenericLineItemCollection"
+  parameterClass="Integer"
+  resultMap="order-with-generic-collection-lineitem" >
+	select * from Orders where Order_ID = #value#
+</statement>
+
+4/
+    <resultMap id="order-with-generic-lines-result-lazy" class="Order" 
+        extends="lite-order-result-by-name" >
+      <result property="LineItemsGenericList" column="Order_ID" lazyLoad="true" select="GetLineItemsForOrderWithListClass2" />
+    </resultMap>
+
+   <statement id="GetOrderWithGenericLineItemsLazy"
+      parameterClass="Integer"
+      resultMap="order-with-generic-lines-result-lazy" >
+      select * from Orders where Order_ID = #value#
+    </statement>
+
+5/
+<resultMap id="order-with-generic-typed-collection-lineitem" class="Order" 
+	extends="lite-order-result-by-name" >
+	<result property="LineItemsCollection2" column="Order_ID" select="GetLineItemsForOrderWithListClass2" />
+</resultMap>
+
+ <statement id="GetOrderWithGenericTypedLineItemCollection"
+	parameterClass="Integer"
+	resultMap="order-with-generic-typed-collection-lineitem" >
+	select * from Orders where Order_ID = #value#
+</statement>
+
+
+6/
+    <resultMap id="order-with-generic-typed-collection-lineitem-lazy" class="Order" 
+      extends="lite-order-result-by-name" >
+      <result property="LineItemsCollection2" lazyLoad="true" column="Order_ID" select="GetLineItemsForOrderWithListClass2" />
+    </resultMap>
+    
+    <statement id="GetOrderWithGenericTypedLineItemCollectionLazy"
+     parameterClass="Integer"
+     resultMap="order-with-generic-typed-collection-lineitem-lazy" >
+      select * from Orders where Order_ID = #value#
+    </statement>

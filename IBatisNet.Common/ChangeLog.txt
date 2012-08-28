@@ -1,0 +1,31 @@
+IBatisNet Common Change Log
+
+------------------------------
+1.5 - XX/XX/XX
+------------------------------
+Issues
+ - IBATISNET-184 : Invalid support for public/protected field in result property
+
+------------------------------
+1.4.1 - 10/08/2006 GA
+------------------------------
+
+------------------------------
+1.4 - 05/07/2006 BETA
+------------------------------
+
+- Fixed IBATISNET-145 
+
+------------------------------
+1.3 - 15/12/2005
+------------------------------
+- Updated to log4net V1.2.9 
+- Re-add signing on assembly 
+- Added custom logger support
+
+------------------------------
+1.2.0 - 10/07/2005
+------------------------------
+- Added Resources.BaseDirectory (name of the directory used to probe the assemblies.) 
+- Renamed Resources.RootApplication to Resources.ApplicationBase in IBatisNet.Common.Utilities 
+  + fixed issue in init of ApplicationBase

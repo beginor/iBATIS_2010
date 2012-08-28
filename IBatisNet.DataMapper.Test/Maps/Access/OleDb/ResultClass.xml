@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<sqlMap namespace="ResultClass" 
+xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<statements>	
+	
+		<statement id="GetBoolean"
+					parameterClass="Int"
+					resultClass="bool" >
+			select CBool('True') from Orders where Order_ID = #dummy#
+		</statement>		
+		<statement id="GetBooleanWithoutResultClass"
+					parameterClass="Int"
+					extends="GetBoolean">
+		</statement>	
+
+		<statement id="GetByte"
+					parameterClass="Int"
+					resultClass="byte" >
+			select CByte(155) from Orders where Order_ID = #value#
+		</statement>			
+		<statement id="GetByteWithoutResultClass"
+					parameterClass="Int"
+					extends="GetByte">
+		</statement>
+		
+		<statement id="GetChar"
+					parameterClass="Int"
+					resultClass="char" >
+			select 'a' from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetCharWithoutResultClass"
+					parameterClass="Int"
+					extends="GetChar">
+		</statement>
+		
+		<statement id="GetDate"
+					parameterClass="Int"
+					resultClass="date" >
+			select Order_Date from Orders where Order_ID  = #value#
+		</statement>
+		<statement id="GetDateWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDate">
+		</statement>
+									
+		<statement id="GetDecimal"
+					parameterClass="Int"
+					resultClass="decimal" >
+			select 1.56 from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetDecimalWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDecimal">
+		</statement>
+
+		<statement id="GetDouble"
+					parameterClass="Int"
+					resultClass="double" >
+			select CDbl(99.5) from Orders where Order_ID= #value#
+		</statement>
+		<statement id="GetDoubleWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDouble">
+		</statement>
+
+		<statement id="GetGuid" parameterClass="Int" resultClass="guid" >
+			select {CD5ABF17-4BBC-4C86-92F1-257735414CF4} from Orders where Order_ID = #value# 
+		</statement>
+		<statement id="GetGuidWithoutResultClass" parameterClass="Int" extends="GetGuid">
+		</statement> 
+		
+		<statement id="GetInt16"
+					parameterClass="Int"
+					resultClass="short" >
+			select 32111 from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetInt16WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt16">
+		</statement>	
+			
+		<statement id="GetInt32"
+					parameterClass="Int"
+					resultClass="int" >
+			select 999999 from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetInt32WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt32">
+		</statement>
+		
+		<statement id="GetInt64"
+					parameterClass="Int"
+					resultClass="long" >
+			select 9223372036854775800 from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetInt64WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt64">
+		</statement>
+		
+		<statement id="GetSingle"
+					parameterClass="Int"
+					resultClass="double" >
+			select CSng(92233.5) from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetSingleWithoutResultClass"
+					parameterClass="Int"
+					extends="GetSingle">
+		</statement>
+						
+		<statement id="GetString"
+					parameterClass="Int"
+					resultClass="string" >
+			select 'VISA'
+			from Orders where Order_ID = #value#
+		</statement>
+		<statement id="GetStringWithoutResultClass"
+					parameterClass="Int"
+					extends="GetString">
+		</statement>
+		
+	</statements>
+
+</sqlMap>

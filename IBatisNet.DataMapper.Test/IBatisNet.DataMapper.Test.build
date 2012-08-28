@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<project name="IBatisNet.DataMapper.Test" default="build">
+    <!--
+        Required properties:
+            * build.dir             - (path) root level to build to, assemblies will go in ${build.dir}/${project.config}/bin
+            * build.debug           - (true|false) debug build?
+            * current.build.defines - framework-specific build defines
+    -->
+    <target name="build">
+
+		<echo message="Build Directory is ${build.dir}/${project.config}/bin" />
+
+        <!-- build IBatisNet.DataMapper.Test -->
+        <csc target="library" define="${current.build.defines}" warnaserror="true"
+		debug="${build.debug}" output="${build.dir}/${project.config}/bin/${nant.project.name}.dll" doc="${build.dir}/${project.config}/bin/${nant.project.name}.xml">
+            <nowarn>
+				<warning number="${nowarn.numbers}" />
+			</nowarn>
+			<sources failonempty="true">
+                <include name="**/*.cs" />
+            </sources>
+			<resources prefix="IBatisNet.DataMapper.Test" dynamicprefix="true">
+				<include name="User.hbm.xml" />
+				<include name="properties.xml" />
+				<exclude name="bin/**/*.xml" />
+			</resources>
+            <resources prefix="IBatisNet.DataMapper.Test.bin.Debug">
+                <include name="bin/**/SqlMap_MSSQL_SqlClient.config" />
+            </resources>
+            <references basedir="${build.dir}/${project.config}/bin">
+                <include name="*.dll"/>
+                <exclude name="${nant.project.name}.dll"/>
+            </references>
+        </csc>
+
+        <copy todir="${build.dir}">
+            <fileset basedir="${nant.project.basedir}">
+                <include name="DataBase*.config" />
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dir}/${project.config}/bin">
+            <fileset basedir="${nant.project.basedir}">
+				<include name="*.jpg" />
+            </fileset>
+        </copy>
+
+        <copy flatten="true" todir="${build.dir}/${project.config}/bin">
+            <fileset basedir="${nant.project.basedir}">
+                <include name="bin/**/*.config" />
+            </fileset>
+        </copy>
+				
+		<!-- delete the mapping files used for testing -->
+		<delete dir="${build.dir}/maps" failonerror="false" />
+		<mkdir dir="${build.dir}/maps" />
+		
+		<echo message="Copy mapping files" />
+
+		<copy todir="${build.dir}/maps">
+            <fileset basedir="Maps">
+				<include name="**/*" />
+            </fileset>
+        </copy>
+
+		<!-- delete the script files used for testing -->
+		<delete dir="${build.dir}/Scripts" failonerror="false" />
+		<mkdir dir="${build.dir}/Scripts" />
+		
+		<echo message="Copy Scripts files" />
+
+		<copy todir="${build.dir}/Scripts">
+            <fileset basedir="Scripts">
+				<include name="**/*" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="test" depends="build">
+ 		<mkdir dir="${build.dir}/testDataMapperResults" />
+        <nunit2 failonerror="false">
+            <formatter type="Plain" />
+            <formatter type="Xml" usefile="true" extension=".xml" outputdir="${build.dir}/testDataMapperResults" />
+            <test
+				assemblyname="${build.dir}/${project.config}/bin/${nant.project.name}.dll"
+				appconfig="${build.dir}/${project.config}/bin/${nant.project.name}.dll.config">
+                <categories>
+                    <exclude name="EmbedParameter" />
+                    <exclude name="MySql" />
+                    <exclude name="Oracle" />
+                    <exclude name="PostgreSQL" />
+                    <exclude name="StatementNamespaces" />
+                </categories>
+            </test>
+         </nunit2>
+		<nunit2report out="${build.dir}/testDataMapperResults/UnitTests.html" verbose="true">
+			<fileset>
+				<include name="${build.dir}/testDataMapperResults/*-results.xml"/>
+			</fileset>
+		</nunit2report>
+    </target>    
+    
+</project>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Category" xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	
+	<alias>
+		<typeAlias alias="Category" type="IBatisNet.DataMapper.Test.Domain.Category, IBatisNet.DataMapper.Test"/>
+	</alias>
+	
+	<resultMaps>
+		<resultMap id="Category-result" class="Category">
+		<result property="Id" column="Category_ID"/>
+		<result property="Name" column="Category_Name"/>
+		<result property="Guid" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000"/>
+		</resultMap>
+	</resultMaps >
+  	
+	<statements>
+
+		<select id="GetCategoryWithNullValueReplacementGuid" resultMap="Category-result" >
+		select
+		Category_ID,
+		Category_Name,
+		Category_Guid
+		from Categories
+		where Category_ID = #value#
+		</select>
+	
+		<select id="GetCategory" parameterClass="int" resultClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as GuidString
+			from Categories  
+			where Category_ID = #value# 
+		</select>
+		
+		<select id="GetCategoryGuid" parameterClass="Integer" resultClass="guid">
+			select
+			Category_Guid as value
+			from Categories  
+			where Category_ID = #value# 
+		</select>
+		
+		<insert id="InsertCategory" parameterClass="Category" resultClass="int">
+			<selectKey property="Id" type="pre" resultClass="int">
+				select s_categories.nextval as value from dual
+            </selectKey>		
+			insert into Categories  
+				(Category_Id, Category_Name, Category_Guid) 
+			values 
+				(#Id#, #Name#, #GuidString:Varchar2#)
+		</insert>
+		
+		<!--  
+		Note: Use a parameterMap for statements with string parameters!
+		-->
+		<insert id="InsertCategoryViaInsertStatement" parameterMap="InsertCategoryViaInsertStatementParamMap" >
+			<selectKey property="Id" type="pre" resultClass="int">
+				select s_categories.nextval as value from dual
+            </selectKey>		
+            insert into Categories  
+				(Category_Id, Category_Name, Category_Guid) 
+			values 
+				(?, ?, ?)
+		</insert>
+		
+		<insert id="InsertCategoryViaParameterMap" parameterMap="InsertParam" resultClass="int">
+			<selectKey property="Id" type="pre" resultClass="int">
+				select s_categories.nextval as value from dual
+            </selectKey>	
+			insert into Categories  
+				(Category_Id, Category_Name, Category_Guid)
+			values 
+				(?,?,?)
+		</insert>
+
+		<insert id="InsertCategoryNull" parameterMap="insert-null-params" resultClass="int">
+			<selectKey property="Id" type="pre" resultClass="int">
+				select s_categories.nextval as value from dual
+            </selectKey>	
+			insert into Categories  
+				(Category_Id, Category_Name, Category_Guid)
+			values 
+				(?,?,?)
+		</insert>
+		
+		<update id="UpdateCategoryViaParameterMap" parameterMap="UpdateParam">
+			update Categories set
+			Category_Name =?,
+			Category_Guid = ?
+			where
+			Category_Id = ?
+		</update>
+
+		<!--
+		<insert id="InsertCategoryViaStoreProcedure" parameterMap="stored-proc-insert-params">
+			call prc_InsertCategory(?, ?, ?)
+		</insert>
+		-->
+		<procedure id="InsertCategoryViaStoreProcedure" parameterMap="stored-proc-insert-params">
+			prc_InsertCategory
+		</procedure>
+		
+						
+		<insert id="InsertCategoryGenerate" parameterMap="insert-generate-params">
+			<selectKey property="Id" type="pre" resultClass="int">
+				select s_categories.nextval as value from dual
+            </selectKey>
+            <generate table="Categories" />
+		</insert>
+		
+		<update id="UpdateCategoryGenerate" parameterMap="update-generate-params">
+			<generate table="Categories" by="Category_Id"/>
+		</update>
+		
+		<delete id="DeleteCategoryGenerate" parameterMap="delete-generate-params">
+			<generate table="Categories" by="Category_Id, Category_Name"/>
+		</delete>
+
+		<!--
+		Do not use a parameterMap with more parameters than the SQL statement needs as parameters or
+		pass in a parameter object that has more properties than the SQL statement needs as parameters
+		since they will be added to the command's parameters collection.
+		Oracle with OracleClient or ODP will throw an error unlike MSSQL and MySQL databases and providers.
+		-->
+		<select id="SelectByPKCategoryGenerate" resultClass="Category" parameterClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" by="Category_Id"/> 
+		</select>
+		
+		<select id="SelectAllCategoryGenerate" resultClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" /> 
+		</select>
+		
+		<statement id="DynamicGuid" 
+			resultClass="Category" 
+			parameterClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as GuidString
+			from Categories  
+			<dynamic prepend="where">
+				<isNotEqual prepend="and" property="Guid" compareProperty="EmptyGuid">
+					Category_Guid=#GuidString:Varchar2#
+				</isNotEqual>
+			</dynamic>
+		</statement>
+	</statements>
+	
+	<parameterMaps>
+	
+		<parameterMap id="InsertCategoryViaInsertStatementParamMap" class="Category">
+			<parameter property="Id" column="p_Category_Id" dbType="Int32" />
+			<parameter property="Name" column="p_Category_Name" dbType="Varchar2" size="32"/>
+			<parameter property="GuidString" column="p_Category_Guid" dbType="Varchar2" size="36"/>
+		</parameterMap>
+
+		<parameterMap id="stored-proc-insert-params" class="Hashtable">
+			<parameter property="Name" direction="Input" column="p_Category_Name" dbType="Varchar2" size="32"/>
+			<parameter property="GuidString" direction="Input" column="p_Category_Guid" dbType="Varchar2" size="36"/>
+			<parameter property="Id" direction="Output" column="p_Category_Id" dbType="Int32" />
+		</parameterMap>
+		
+		<!-- 
+		Unlike MSSQL and MySQL, we need to have Id as a property since this
+		Oracle test uses a "pre" selectKey sequence that is used on insert 
+		into Id property parameter.
+		
+		MSSQL and MySQL use IDENTITY and AUTOGENERATE Ids that are generated after
+		the insert.  Therefore, the Id property is not needed as a parameter for those databases.
+		
+		Unfortunately, since the Id property is defined here for an INSERT statement, we cannot 
+		extend this parameterMap for an UPDATE statement unlike MSSQL and MySQL because the Id
+		property is already positioned as the first parameter in the parameterMap
+		when it needs to be the last parameter in an UPDATE statement.
+		-->		
+		<parameterMap id="InsertParam" class="Category">
+			<parameter property="Id"   column="Category_Id" dbType="Int32" />
+			<parameter property="Name" column="Category_Name" dbType="Varchar2" size="32"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Varchar2" size="36"/>
+		</parameterMap>
+
+		<parameterMap id="InsertParamWithoutId" class="Category">
+			<parameter property="Name" column="Category_Name" dbType="Varchar2" size="32"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Varchar2" size="36"/>
+		</parameterMap>
+		
+		<parameterMap id="insert-null-params" class="Category">
+			<parameter property="Id"   column="Category_Id" dbType="Int32" />
+			<parameter property="Name" column="Category_Name" dbType="Varchar2" size="32"/>
+			<parameter property="GuidString" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000" dbType="Varchar2" size="36"/>
+		</parameterMap>
+		
+		<parameterMap id="UpdateParam" extends="InsertParamWithoutId" class="Category">
+			<parameter property="Id" column="Category_Id" dbType="Int32"/>
+		</parameterMap>
+		
+		<!-- Used by generated statement -->
+		<!-- 
+		Unlike MSSQL and MySQL, we need to have Id as a property since this
+		Oracle test uses a "pre" selectKey sequence that is used on insert 
+		into Id property parameter.
+		
+		MSSQL and MySQL use IDENTITY and AUTOGENERATE Ids that are generated after
+		the insert.  Therefore, the Id property is not needed as a parameter for those databases.
+		
+		Unfortunately, since the Id property is defined here for an INSERT statement, we cannot 
+		extend this parameterMap for an UPDATE statement unlike MSSQL and MySQL because the Id
+		property is already positioned as the first parameter in the parameterMap
+		when it needs to be the last parameter in an UPDATE statement.
+		-->		
+		<parameterMap id="insert-generate-params" class="Category">
+			<parameter property="Id"   column="Category_Id" dbType="Int32" />		
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Varchar2"/>
+		</parameterMap>
+
+		<parameterMap id="insert-generate-params-without-id" class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Varchar2"/>
+		</parameterMap>
+		
+		<parameterMap id="update-generate-params" extends="insert-generate-params-without-id" class="Category">
+			<parameter property="Id" column="Category_Id" dbType="Int32"/>
+		</parameterMap>
+		
+		<parameterMap id="delete-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" dbType="Int32"/>
+			<parameter property="Name" column="Category_Name"/>
+		</parameterMap>
+		
+		<parameterMap id="select-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" dbType="Int32"/>
+		</parameterMap>
+		
+	</parameterMaps>
+	
+</sqlMap>

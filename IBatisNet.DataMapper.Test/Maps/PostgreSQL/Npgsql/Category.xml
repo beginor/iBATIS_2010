@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Category" xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	
+	<alias>
+		<typeAlias alias="Category" type="IBatisNet.DataMapper.Test.Domain.Category, IBatisNet.DataMapper.Test"/>
+	</alias>
+	
+  <resultMaps>
+    <resultMap id="Category-result" class="Category">
+      <result property="Id" column="Category_ID"/>
+      <result property="Name" column="Category_Name"/>
+      <result property="Guid" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000"/>
+    </resultMap>
+  </resultMaps >
+
+	<statements>
+	
+		<select id="GetCategoryWithNullValueReplacementGuid" resultMap="Category-result" >
+		  select
+		  Category_ID,
+		  Category_Name,
+		  Category_Guid
+		  from Categories
+		  where Category_ID = #value#
+		</select>
+
+		<select id="GetCategory" parameterClass="Integer" resultClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as GuidString
+			from Categories  
+			where Category_ID = #value# 
+		</select>
+		
+		<select id="GetCategoryGuid" parameterClass="Integer" resultClass="guid">
+			select
+			Category_Guid as value
+			from Categories  
+			where Category_ID = #value# 
+		</select>
+		
+		<!-- Test for statement as insert -->
+		<insert id="InsertCategory" parameterClass="Category">
+			<selectKey property="Id" type="post" resultClass="int">
+				SELECT cast(last_value as int) AS value
+                FROM categories_category_id_seq
+            </selectKey>			
+  			insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				(#Name#, #GuidString:Text#);
+		</insert>
+		
+		<!--  -->
+		<insert id="InsertCategoryViaInsertStatement" parameterClass="Category" >
+			<selectKey property="Id" type="post" resultClass="int">
+				SELECT cast(last_value as int) AS value
+                FROM categories_category_id_seq
+            </selectKey>			
+            insert into Categories  
+				(Category_Name, Category_Guid) 
+			values 
+				(#Name#, #GuidString:Text#)
+		</insert>
+
+		<insert id="InsertCategoryViaParameterMap" parameterMap="InsertParam">
+			<selectKey property="Id" type="post" resultClass="int">
+				SELECT cast(last_value as int) AS value
+                FROM categories_category_id_seq
+            </selectKey>
+			insert into Categories  
+				(Category_Name, Category_Guid)
+			values 
+				(?,?);
+		</insert>
+
+		<insert id="InsertCategoryNull" parameterMap="insert-null-params">
+			<selectKey property="Id" type="post" resultClass="int">
+				SELECT cast(last_value as int) AS value
+                FROM categories_category_id_seq
+            </selectKey>
+			insert into Categories  
+				(Category_Name, Category_Guid)
+			values 
+				(?,?);
+		</insert>
+		
+		<update id="UpdateCategoryViaParameterMap" parameterMap="UpdateParam">
+			update Categories set
+			Category_Name =?,
+			Category_Guid = ?
+			where
+			Category_Id = ?
+		</update>
+
+		<insert id="InsertCategoryGenerate" parameterMap="insert-generate-params">
+			<selectKey property="Id" type="post" resultClass="int">
+				SELECT cast(last_value as int) AS value
+                FROM categories_category_id_seq
+            </selectKey>
+            <generate table="Categories" />
+		</insert>
+		
+		<update id="UpdateCategoryGenerate" parameterMap="update-generate-params">
+			<generate table="Categories" by="Category_Id"/>
+		</update>
+		
+		<delete id="DeleteCategoryGenerate" parameterMap="delete-generate-params">
+			<generate table="Categories" by="Category_Id, Category_Name"/>
+		</delete>
+		
+		<!--
+		Using a parameterMap with more parameters than the SQL statement needs as parameters 
+		will throw an error with Npgsql 0.7.  This is like Oracle with MS OracleClient or ODP.NET 10g.
+		
+		Removing the parameters doesn't help though, unlike Oracle since it only selects the columns
+		listed in the parameterMap!
+		
+		MSSQL and MySQL databases and providers seem to allow unneeded parameters.
+		-->		
+		<!--
+		This creates an invalid SQL statement (ends with ? instead of :param0) :
+		<select id="SelectByPKCategoryGenerate" resultClass="Category" parameterMap="select-generate-params">
+		-->
+		<select id="SelectByPKCategoryGenerate" resultClass="Category" parameterClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" by="Category_Id"/> 
+		</select>
+		
+		<select id="SelectAllCategoryGenerate" resultClass="Category" parameterMap="select-generate-params">
+			<generate table="Categories" /> 
+		</select>
+		
+		<statement id="DynamicGuid" 
+			resultClass="Category" 
+			parameterClass="Category">
+			select
+			Category_ID as Id,
+			Category_Name as Name,
+			Category_Guid as GuidString
+			from Categories  
+			<dynamic prepend="where">
+				<isNotEqual prepend="and" property="Guid" compareProperty="EmptyGuid">
+					Category_Guid=#GuidString:Text#
+				</isNotEqual>
+			</dynamic>
+		</statement>
+	</statements>
+	
+	<parameterMaps>
+		
+		<parameterMap id="InsertParam"  class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Text"/>
+		</parameterMap>
+		
+		<parameterMap id="insert-null-params"  class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" nullValue="00000000-0000-0000-0000-000000000000" dbType="Text"/>
+		</parameterMap>
+		
+		<parameterMap id="UpdateParam" extends="InsertParam"  class="Category">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+		
+		<!-- Used by generated statement -->
+		
+		<parameterMap id="insert-generate-params" class="Category">
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Text"/>
+		</parameterMap>
+		
+		<parameterMap id="update-generate-params" extends="insert-generate-params"  class="Category">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+		
+		<parameterMap id="delete-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+			<parameter property="Name" column="Category_Name"/>
+		</parameterMap>
+
+		<!--
+		<parameterMap id="select-generate-params">
+			<parameter property="Id" column="Category_Id" />
+		</parameterMap>
+		-->
+		<parameterMap id="select-generate-params" class="Category">
+			<parameter property="Id" column="Category_Id" />
+			<parameter property="Name" column="Category_Name"/>
+			<parameter property="GuidString" column="Category_Guid" dbType="Text"/>
+		</parameterMap>
+		
+	</parameterMaps>
+	
+</sqlMap>

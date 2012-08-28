@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="EmbededParameter" 
+xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	
+	<alias>
+		<typeAlias alias="Sample" type="IBatisNet.DataMapper.Test.Domain.Sample, IBatisNet.DataMapper.Test"/>
+	</alias>
+	
+	<statements>
+	
+		<!-- Sequential rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SequenceID] = #value#
+		-->
+		<select id="GetManyRecordsBySequence" parameterClass="Integer" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SequenceID] = #value#
+		</select>
+
+		<!-- Sequential rows, index seek and bookmark lookup
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest] WITH(INDEX([IDX_ManyRecordsTest_Seq])) 
+		WHERE 
+			[Many_SequenceID] = 91
+		-->
+		<select id="GetManyRecordsBySequenceWithIndex" parameterClass="Integer" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest] WITH(INDEX([IDX_ManyRecordsTest_Seq])) 
+		WHERE 
+			[Many_SequenceID] = #value#
+		</select>
+
+		<!-- Distributed rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_DistributedID] = 91
+		-->
+		<select id="GetManyRecordsByDistributed" parameterClass="Integer" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_DistributedID] = #value#
+		</select>
+
+		<!-- Distributed rows, index seek and bookmark lookup
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest] WITH(INDEX([IDX_ManyRecordsTest_Dist])) 
+		WHERE 
+			[Many_DistributedID] = 91
+		-->
+		<select id="GetManyRecordsByDistributedWithIndex" parameterClass="Integer" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest] WITH(INDEX([IDX_ManyRecordsTest_Dist])) 
+		WHERE 
+			[Many_DistributedID] = #value#
+		</select>
+
+		<!-- FifthId rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_FifthID] = 30000 
+		-->
+		<select id="GetManyRecordsByFifth" parameterClass="Integer" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_FifthID] = #value# 
+		</select>
+
+		<!-- FifthId rows OR Sequence rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_FifthID] = 30000 OR
+			[Many_SequenceID] = 91
+		-->
+		<select id="GetManyRecordsByFifthOrSequence" parameterClass="Hashtable" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_FifthID] = #FifthID# OR
+			[Many_SequenceID] = #SequenceID#
+		</select>
+
+		<!-- Date rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleDate] BETWEEN '1999-01-01' AND '1999-01-02' 
+		-->
+		<select id="GetManyRecordsByDates" parameterClass="Hashtable" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleDate] BETWEEN #StartDate# AND #EndDate# 
+		</select>
+
+		<!-- Char rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleCharValue] = 'AAA'		
+		-->
+		<select id="GetManyRecordsByChar" parameterClass="String" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleCharValue] = #value#
+		</select>
+		
+		<!-- Char rows, table scan
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleCharValue] LIKE '%AAA%'		
+		-->
+		<select id="GetManyRecordsByLikeChar" parameterClass="String" resultClass="Sample">
+		SELECT 
+			[Many_FirstID] AS FirstId, 
+			[Many_SecondID] AS SecondId, 
+			[Many_ThirdID] AS ThirdId, 
+			[Many_FourthID] AS FourthId,  
+			[Many_FifthID] AS FifthId,  
+			[Many_SequenceID] AS SequenceId,  
+			[Many_DistributedID] AS DistributedId, 
+			[Many_SampleCharValue] AS SampleChar,  
+			[Many_SampleDecimal] AS SampleDecimal, 
+			[Many_SampleMoney] AS SampleMoney, 
+			[Many_SampleDate] AS SampleDate, 
+			[Many_SequenceDate] AS SequenceDate
+		FROM 
+			[ManyRecordsTest]
+		WHERE 
+			[Many_SampleCharValue] LIKE '%$value$%'
+		</select>
+	</statements>
+	
+</sqlMap>

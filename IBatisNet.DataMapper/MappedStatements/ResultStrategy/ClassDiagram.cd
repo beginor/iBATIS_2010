@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Comment CommentText="Determines how a record will ne map. &#xD;&#xA;If we have specify a resutlMap tag on the statement tag then use the MapStrategy&#xD;&#xA;If we have specify a resultClass tag on the statement tag then use the ResultClassStrategy&#xD;&#xA;else use the ObjectStrategy">
+    <Position X="7.625" Y="0.5" Height="0.979" Width="3.117" />
+  </Comment>
+  <Comment CommentText="The ResultClassStrategy delegates to an other IResultStrategy based on the class type.&#xD;&#xA;With a &quot;primitive&quot; type use the SimpleTypeStrategy&#xD;&#xA;With an IList class use the ListStrategy&#xD;&#xA;With an IDictionary use the DictionayStrategy&#xD;&#xA;else use an AutoMapStrategy">
+    <Position X="4.875" Y="3.969" Height="0.948" Width="3.033" />
+  </Comment>
+  <Comment CommentText="When use an resultMap tag, delegates on the ResultMapStrategy or GroupByStrategy based on the groupBy attribute.">
+    <Position X="0.5" Y="2.177" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.AutoMapStrategy" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\AutoMapStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAIAAAAAACAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.DictionaryStrategy" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\DictionaryStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.ListStrategy" Collapsed="true">
+    <Position X="4.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\ListStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.ObjectStrategy" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\ObjectStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.ResultClassStrategy" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\ResultClassStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAEAAAAAIAgAAAAAAAAAAAAAAAAAABABAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.ResultMapStrategy" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\ResultMapStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.ResultStrategyFactory" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\ResultStrategyFactory.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAABAAAAAAAEAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.SimpleTypeStrategy" Collapsed="true">
+    <Position X="3.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\SimpleTypeStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.MapStrategy" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\MapStrategy.cs</FileName>
+      <HashCode>AAAAEAAIAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.GroupByStrategy" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\GroupByStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="IBatisNet.DataMapper.MappedStatements.ResultStrategy.IResultStrategy">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>MappedStatements\ResultStrategy\IResultStrategy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+</ClassDiagram>

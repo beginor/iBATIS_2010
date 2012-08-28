@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="ParentChild2" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+  <resultMaps>
+    <resultMap id="ParentResult" class="Parent" groupBy="Id">
+      <result property="Id" column="Parent_Id" />
+      <result property="RowVersion" column="Parent_RowVersion" />
+      <result property="Description" column="Parent_Description"/>
+      <result property="Children" resultMapping="ParentChild2.ChildResult" />
+    </resultMap>
+
+    <resultMap id="ChildResult" class="Child">
+      <result property="Id" column="Child_Id" />
+      <result property="RowVersion" column="Child_RowVersion" />
+      <result property="ParentId" column="Child_ParentId" />
+      <result property="Description" column="Child_Description"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="GetAllParentsNPlus2" resultMap="ParentResult">
+      SELECT 
+        parent.id          parent_id,
+        parent.rowversion  parent_rowversion,
+        parent.description parent_description,
+        child.id           child_id,
+        NULL               child_rowversion,
+        child.parentid     child_parentid,
+        child.description  child_description
+      FROM   parent
+        LEFT JOIN child
+        ON parent.id = child.parentid
+    </select>
+  </statements>
+</sqlMap>

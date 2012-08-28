@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="ParameterClass" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ibatis.apache.org http://ibatis.apache.org/xsd/SqlMap.xsd">
+	<statements>
+		<select id="GetCountOfAccountsWithNullEmail">
+			SELECT CAST(COUNT(*) as int) FROM Accounts WHERE Account_Email IS NULL
+		</select>	
+		<update id="UpdateNullEmailToDBNull" parameterClass="Hashtable">
+			UPDATE Accounts SET
+				Account_Email = #DBNullValue#
+			WHERE
+				Account_Email IS NULL
+		</update>		
+	</statements>	
+</sqlMap>

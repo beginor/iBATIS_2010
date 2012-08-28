@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{998B79D9-800F-493F-A263-306F06906E2F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>IBatisNet.DataMapper.Test</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>IBatisNet.DataMapper.Test</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;dotnet2</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;dotnet2</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\External-Bin\Net\4.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\External-Bin\Net\4.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\A.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Account.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\AccountBis.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\AccountCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Address.cs" />
+    <Compile Include="Domain\Application.cs" />
+    <Compile Include="Domain\B.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Book.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\C.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Category.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Child.cs" />
+    <Compile Include="Domain\Complex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Coupon.cs" />
+    <Compile Include="Domain\CustomInheritance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\D.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Document.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\DocumentCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\E.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Enumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\F.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\GuidStringTypeHandlerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\HundredsTypeHandlerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\ImmutableCategory.cs" />
+    <Compile Include="Domain\ImmutableCategoryPropertyContainer.cs" />
+    <Compile Include="Domain\Item.cs" />
+    <Compile Include="Domain\LineItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\LineItemCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\LineItemCollection2.cs" />
+    <Compile Include="Domain\Newspaper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Nullable.cs" />
+    <Compile Include="Domain\OneZeroBoolTypeHandlerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Order.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Other.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\OuiNonBoolTypeHandlerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Parent.cs" />
+    <Compile Include="Domain\Petshop\Category.cs" />
+    <Compile Include="Domain\Petshop\Item.cs" />
+    <Compile Include="Domain\Petshop\Product.cs" />
+    <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\Query.cs" />
+    <Compile Include="Domain\Role.cs" />
+    <Compile Include="Domain\Sample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Search.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Simple.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\VarcharCallBack.cs" />
+    <Compile Include="NUnit\SqlMapTests\BaseTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\CacheController\CacheModelTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\CacheController\FifoCacheControllerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\CacheController\LruCacheControllerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\CacheController\MemoryCacheControllerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\CacheKeyTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\CacheTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ComplexTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ConfigureTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ConstructorTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\DynamicPrependTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\DynamicTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\Generics\NullableTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\Generics\ResultMapTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\Generics\ResultClassTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\Generics\StatementTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\GroupByTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\InheritanceTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\MSSQL\Generics\StatementTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\MSSQL\ProcedureTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\MSSQL\StatementGenerate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\MSSQL\StatementTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\MultipleResultTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\MySql\StatementGenerate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\MySql\StatementTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\Oracle\ProcedureTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\Oracle\StatementGenerate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\Oracle\StatementTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ParameterClass.cs" />
+    <Compile Include="NUnit\SqlMapTests\ParameterMapTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\Perf\PerformanceTest.cs" />
+    <Compile Include="NUnit\SqlMapTests\PostgreSQL\StatementGenerate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\PostgreSQL\StatementTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ResultClassTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ResultMapTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\StatementNamespaceTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\StatementTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\ThreadTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnit\SqlMapTests\TransactionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="cool.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Access\OleDb\Account.xml" />
+    <Content Include="Maps\Access\OleDb\Category.xml" />
+    <Content Include="Maps\Access\OleDb\Complex.xml" />
+    <Content Include="Maps\Access\OleDb\Document.xml" />
+    <Content Include="Maps\Access\OleDb\DynamicAccount.xml" />
+    <Content Include="Maps\Access\OleDb\Enumeration.xml" />
+    <Content Include="Maps\Access\OleDb\LineItem.xml" />
+    <Content Include="Maps\Access\OleDb\Nullable.xml" />
+    <Content Include="Maps\Access\OleDb\Order.xml" />
+    <Content Include="Maps\Access\OleDb\Other.xml" />
+    <Content Include="Maps\Access\OleDb\ParameterClass.xml" />
+    <Content Include="Maps\Access\OleDb\ResultClass.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Account.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Category.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Complex.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Document.xml" />
+    <Content Include="Maps\MSSQL\Odbc\DynamicAccount.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Enumeration.xml" />
+    <Content Include="Maps\MSSQL\Odbc\LineItem.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Nullable.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Order.xml" />
+    <Content Include="Maps\MSSQL\Odbc\Other.xml" />
+    <Content Include="Maps\MSSQL\Odbc\ParameterClass.xml" />
+    <Content Include="Maps\MSSQL\Odbc\ResultClass.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Account.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Category.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Complex.xml" />
+    <Content Include="Maps\MSSQL\OleDb\document.xml" />
+    <Content Include="Maps\MSSQL\OleDb\DynamicAccount.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Enumeration.xml" />
+    <Content Include="Maps\MSSQL\OleDb\LineItem.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Nullable.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Order.xml" />
+    <Content Include="Maps\MSSQL\OleDb\Other.xml" />
+    <Content Include="Maps\MSSQL\OleDb\ParameterClass.xml" />
+    <Content Include="Maps\MSSQL\OleDb\ResultClass.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Category.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Complex.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\ConstructorInjection.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Coupons.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Document.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\DynamicAccount.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\EmbedParameter.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Enumeration.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\GroupByMapping.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\LineItem.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\NewsPaper.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Nullable.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Order.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Other.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\ParameterClass.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\ParentChild1.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\ParentChild2.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\ResultClass.xml" />
+    <Content Include="Maps\MSSQL\SqlClient\Simple.xml" />
+    <Content Include="Maps\MySql\ByteFx\Account.xml" />
+    <Content Include="Maps\MySql\ByteFx\Category.xml" />
+    <Content Include="Maps\MySql\ByteFx\Complex.xml" />
+    <Content Include="Maps\MySql\ByteFx\Document.xml" />
+    <Content Include="Maps\MySql\ByteFx\DynamicAccount.xml" />
+    <Content Include="Maps\MySql\ByteFx\Enumeration.xml" />
+    <Content Include="Maps\MySql\ByteFx\LineItem.xml" />
+    <Content Include="Maps\MySql\ByteFx\Nullable.xml" />
+    <Content Include="Maps\MySql\ByteFx\Order.xml" />
+    <Content Include="Maps\MySql\ByteFx\Other.xml" />
+    <Content Include="Maps\MySql\ByteFx\ParameterClass.xml" />
+    <Content Include="Maps\MySql\ByteFx\ResultClass.xml" />
+    <Content Include="Maps\MySql\MySql\Account.xml" />
+    <Content Include="Maps\MySql\MySql\Category.xml" />
+    <Content Include="Maps\MySql\MySql\Complex.xml" />
+    <Content Include="Maps\MySql\MySql\Document.xml" />
+    <Content Include="Maps\MySql\MySql\DynamicAccount.xml" />
+    <Content Include="Maps\MySql\MySql\Enumeration.xml" />
+    <Content Include="Maps\MySql\MySql\LineItem.xml" />
+    <Content Include="Maps\MySql\MySql\Nullable.xml" />
+    <Content Include="Maps\MySql\MySql\Order.xml" />
+    <Content Include="Maps\MySql\MySql\Other.xml" />
+    <Content Include="Maps\MySql\MySql\ParameterClass.xml" />
+    <Content Include="Maps\MySql\MySql\ResultClass.xml" />
+    <Content Include="Maps\MySql\MySql\Simple.xml" />
+    <Content Include="Maps\Oracle\ODP\Account.xml" />
+    <Content Include="Maps\Oracle\ODP\Category.xml" />
+    <Content Include="Maps\Oracle\ODP\Complex.xml" />
+    <Content Include="Maps\Oracle\ODP\Document.xml" />
+    <Content Include="Maps\Oracle\ODP\DynamicAccount.xml" />
+    <Content Include="Maps\Oracle\ODP\Enumeration.xml" />
+    <Content Include="Maps\Oracle\ODP\LineItem.xml" />
+    <Content Include="Maps\Oracle\ODP\Nullable.xml" />
+    <Content Include="Maps\Oracle\ODP\Order.xml" />
+    <Content Include="Maps\Oracle\ODP\Other.xml" />
+    <Content Include="Maps\Oracle\ODP\ParameterClass.xml" />
+    <Content Include="Maps\Oracle\ODP\ResultClass.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Account.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Category.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Complex.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Document.xml" />
+    <Content Include="Maps\Oracle\OracleClient\DynamicAccount.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Enumeration.xml" />
+    <Content Include="Maps\Oracle\OracleClient\LineItem.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Nullable.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Order.xml" />
+    <Content Include="Maps\Oracle\OracleClient\Other.xml" />
+    <Content Include="Maps\Oracle\OracleClient\ParameterClass.xml" />
+    <Content Include="Maps\Oracle\OracleClient\ResultClass.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Account.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Category.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Complex.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Document.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\DynamicAccount.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Enumeration.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\LineItem.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Nullable.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Order.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\Other.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\ParameterClass.xml" />
+    <Content Include="Maps\PostgreSQL\Npgsql\ResultClass.xml" />
+    <Content Include="NUnit\SqlMapTests\Generics\GenericListTests.txt" />
+    <Content Include="ReadMe.txt" />
+    <Content Include="Scripts\Access\account-init.sql" />
+    <Content Include="Scripts\Access\account-procedure.sql" />
+    <Content Include="Scripts\Access\category-init.sql" />
+    <Content Include="Scripts\Access\category-procedure.sql" />
+    <Content Include="Scripts\Access\DataBase.sql" />
+    <Content Include="Scripts\Access\DataBaseNHibernate.sql" />
+    <Content Include="Scripts\Access\documents-init.sql" />
+    <Content Include="Scripts\Access\enumeration-init.sql" />
+    <Content Include="Scripts\Access\line-item-init.sql" />
+    <Content Include="Scripts\Access\more-account-records.sql" />
+    <Content Include="Scripts\Access\order-init.sql" />
+    <Content Include="Scripts\Access\other-init.sql" />
+    <Content Include="Scripts\Access\swap-procedure.sql" />
+    <Content Include="Scripts\Access\user-init.sql" />
+    <Content Include="Scripts\MSSQL\account-init.sql" />
+    <Content Include="Scripts\MSSQL\account-procedure.sql" />
+    <Content Include="Scripts\MSSQL\category-init.sql" />
+    <Content Include="Scripts\MSSQL\category-procedure.sql" />
+    <Content Include="Scripts\MSSQL\category-procedureWithReturn.sql" />
+    <Content Include="Scripts\MSSQL\child-parent-init.sql" />
+    <Content Include="Scripts\MSSQL\coupons-init.sql" />
+    <Content Include="Scripts\MSSQL\DataBase.sql" />
+    <Content Include="Scripts\MSSQL\DBCreation.sql" />
+    <Content Include="Scripts\MSSQL\documents-init.sql" />
+    <Content Include="Scripts\MSSQL\embed-param-setup-init.sql" />
+    <Content Include="Scripts\MSSQL\embed-param-test-init.sql" />
+    <Content Include="Scripts\MSSQL\enumeration-init.sql" />
+    <Content Include="Scripts\MSSQL\groupby-init.sql" />
+    <Content Include="Scripts\MSSQL\groupby-schema.sql" />
+    <Content Include="Scripts\MSSQL\line-item-init.sql" />
+    <Content Include="Scripts\MSSQL\more-account-records.sql" />
+    <Content Include="Scripts\MSSQL\Nullable-init.sql" />
+    <Content Include="Scripts\MSSQL\order-init.sql" />
+    <Content Include="Scripts\MSSQL\other-init.sql" />
+    <Content Include="Scripts\MSSQL\petstore-drop.sql" />
+    <Content Include="Scripts\MSSQL\petstore-init.sql" />
+    <Content Include="Scripts\MSSQL\petstore-schema.sql" />
+    <Content Include="Scripts\MSSQL\ps_SelectAccount.sql" />
+    <Content Include="Scripts\MSSQL\ps_SelectAllAccount.sql" />
+    <Content Include="Scripts\MSSQL\ps_SelectLineItem.sql" />
+    <Content Include="Scripts\MSSQL\README-embed-param.txt" />
+    <Content Include="Scripts\MSSQL\simple-init.sql" />
+    <Content Include="Scripts\MSSQL\swap-procedure.sql" />
+    <Content Include="Scripts\MSSQL\user-init.sql" />
+    <Content Include="Scripts\MySql\account-init.sql" />
+    <Content Include="Scripts\MySql\account-procedure.sql" />
+    <Content Include="Scripts\MySql\category-init.sql" />
+    <Content Include="Scripts\MySql\category-procedure.sql" />
+    <Content Include="Scripts\MySql\DataBase.sql" />
+    <Content Include="Scripts\MySql\documents-init.sql" />
+    <Content Include="Scripts\MySql\enumeration-init.sql" />
+    <Content Include="Scripts\MySql\line-item-init.sql" />
+    <Content Include="Scripts\MySql\more-account-records.sql" />
+    <Content Include="Scripts\MySql\order-init.sql" />
+    <Content Include="Scripts\MySql\other-init.sql" />
+    <Content Include="Scripts\MySql\simple-init.sql" />
+    <Content Include="Scripts\MySql\swap-procedure.sql" />
+    <Content Include="Scripts\MySql\user-init.sql" />
+    <Content Include="Scripts\Oracle\account-init.sql" />
+    <Content Include="Scripts\Oracle\account-procedure.sql" />
+    <Content Include="Scripts\Oracle\account-refcursor-package-body.sql" />
+    <Content Include="Scripts\Oracle\account-refcursor-package-spec.sql" />
+    <Content Include="Scripts\Oracle\category-init.sql" />
+    <Content Include="Scripts\Oracle\category-procedure.sql" />
+    <Content Include="Scripts\Oracle\DataBase.sql" />
+    <Content Include="Scripts\Oracle\DataBaseNHibernate.sql" />
+    <Content Include="Scripts\Oracle\documents-init.sql" />
+    <Content Include="Scripts\Oracle\enumeration-init.sql" />
+    <Content Include="Scripts\Oracle\line-item-init.sql" />
+    <Content Include="Scripts\Oracle\more-account-records.sql" />
+    <Content Include="Scripts\Oracle\order-init.sql" />
+    <Content Include="Scripts\Oracle\other-init.sql" />
+    <Content Include="Scripts\Oracle\swap-procedure.sql" />
+    <Content Include="Scripts\Oracle\user-init.sql" />
+    <Content Include="Scripts\PostgreSQL\account-init.sql" />
+    <Content Include="Scripts\PostgreSQL\account-procedure.sql" />
+    <Content Include="Scripts\PostgreSQL\category-init.sql" />
+    <Content Include="Scripts\PostgreSQL\category-procedure.sql" />
+    <Content Include="Scripts\PostgreSQL\DataBase.sql" />
+    <Content Include="Scripts\PostgreSQL\documents-init.sql" />
+    <Content Include="Scripts\PostgreSQL\enumeration-init.sql" />
+    <Content Include="Scripts\PostgreSQL\line-item-init.sql" />
+    <Content Include="Scripts\PostgreSQL\more-account-records.sql" />
+    <Content Include="Scripts\PostgreSQL\nullable-init.sql" />
+    <Content Include="Scripts\PostgreSQL\order-init.sql" />
+    <Content Include="Scripts\PostgreSQL\other-init.sql" />
+    <Content Include="Scripts\PostgreSQL\simple-init.sql" />
+    <Content Include="Scripts\PostgreSQL\swap-procedure.sql" />
+    <Content Include="Scripts\PostgreSQL\user-init.sql" />
+    <None Include="DataBase-Template.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="IBatisNet.DataMapper.Test.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="IBatisNet.Test.build" />
+    <EmbeddedResource Include="providers.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Scripts\MSSQL\ps_SelectByIdList.sql" />
+    <EmbeddedResource Include="Maps\MSSQL\SqlClient\Account.xml" />
+    <None Include="SqlMap_Access_OleDb.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_MSSQL_Odbc.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_MSSQL_OleDb.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="SqlMap_MSSQL_SqlClient.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="SqlMap_MySql_ByteFx.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_MySql_MySql.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_Oracle_ODP.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_Oracle_OracleClient.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlMap_PostgreSQL_Npgsql.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IBatisNet.Common.Logging.Log4Net\IBatisNet.Common.Logging.Log4Net.2010.csproj">
+      <Project>{023FE8D7-7E1A-4DDF-A0EA-8FB0E1B3122B}</Project>
+      <Name>IBatisNet.Common.Logging.Log4Net.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBatisNet.Common\IBatisNet.Common.2010.csproj">
+      <Project>{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}</Project>
+      <Name>IBatisNet.Common.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBatisNet.DataMapper\IBatisNet.DataMapper.2010.csproj">
+      <Project>{F3E45F39-3224-4EAD-B138-EB5CC0E32824}</Project>
+      <Name>IBatisNet.DataMapper.2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

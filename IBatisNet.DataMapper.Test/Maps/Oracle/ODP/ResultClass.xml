@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<sqlMap namespace="ResultClass" xmlns="http://ibatis.apache.org/mapping" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<statements>	
+
+		<statement id="GetBoolean"
+					parameterClass="Int"
+					resultClass="bool" >
+			select 1 from dual where 1 = #dummy#
+		</statement>
+		<statement id="GetBooleanWithoutResultClass"
+					parameterClass="Int"
+					extends="GetBoolean">
+		</statement>	
+
+		<statement id="GetByte"
+					parameterClass="Int"
+					resultClass="byte" >
+			select 155 from dual where 1 = #value#
+		</statement>
+		<statement id="GetByteWithoutResultClass"
+					parameterClass="Int"
+					extends="GetByte">
+		</statement>	
+		
+		<statement id="GetChar"
+					parameterClass="Int"
+					resultClass="char" >
+			select cast('a' as char) from dual where 1 = #value#
+		</statement>
+		<statement id="GetCharWithoutResultClass"
+					parameterClass="Int"
+					extends="GetChar">
+		</statement>
+		
+		<statement id="GetDate"
+					parameterClass="Int"
+					resultClass="date" >
+			select TO_DATE('2003-02-15 8:15:00', 'YYYY-MM-DD HH:MI:SS') from dual where 1 = #value#
+		</statement>
+		<statement id="GetDateWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDate">
+		</statement>
+									
+		<statement id="GetDecimal"
+					parameterClass="Int"
+					resultClass="decimal" >
+			select 1.56 from dual where 1 = #value#
+		</statement>
+		<statement id="GetDecimalWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDecimal">
+		</statement>
+
+		<!--
+		Using ODP.NET 10.1
+		Throws System.InvalidCastException
+		at Oracle.DataAccess.Client.OracleDataReader.GetDouble(Int32 i)
+		at IBatisNet.DataMapper.TypeHandlers.DoubleTypeHandler.GetValueByIndex(ResultProperty mapping, IDataReader dataReader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\TypeHandlers\DoubleTypeHandler.cs:line 69
+		at IBatisNet.DataMapper.TypeHandlers.BaseTypeHandler.GetDataBaseValue(ResultProperty mapping, IDataReader dataReader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\TypeHandlers\BaseTypeHandler.cs:line 58
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.SetObjectProperty(RequestScope request, ResultMap resultMap, ResultProperty mapping, Object& target, IDataReader reader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 1059
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ApplyResultMap(RequestScope request, IDataReader reader, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 403
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.RunQueryForObject(RequestScope request, IDalSession session, Object parameterObject, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 562
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 505
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 486
+		at IBatisNet.DataMapper.SqlMapper.QueryForObject(String statementName, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\SqlMapper.cs:line 489
+		at IBatisNet.DataMapper.Test.NUnit.SqlMapTests.ResultClassTest.TestDouble() in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper.Test\NUnit\SqlMapTests\ResultClassTest.cs:line 103
+		-->
+		<statement id="GetDouble"
+					parameterClass="Int"
+					resultClass="double" >
+			select trunc(99.5,1) from dual where 1 = #value#
+		</statement>
+		<statement id="GetDoubleWithoutResultClass"
+					parameterClass="Int"
+					extends="GetDouble">
+		</statement>
+
+		<statement id="GetGuid"
+					parameterClass="Int"
+					resultClass="guid" >
+			select 'CD5ABF17-4BBC-4C86-92F1-257735414CF4' from dual where 1 = #value#
+		</statement>
+		<statement id="GetGuidWithoutResultClass" parameterClass="Int" extends="GetGuid">
+		</statement> 
+		
+		<statement id="GetInt16"
+					parameterClass="Int"
+					resultClass="short" >
+			select 32111 from dual where 1 = #value#
+		</statement>
+		<statement id="GetInt16WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt16">
+		</statement>	
+		
+		<statement id="GetInt32"
+					parameterClass="Int"
+					resultClass="int" >
+			select 999999 from dual where 1 = #value#
+		</statement>
+		<statement id="GetInt32WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt32">
+		</statement>
+		
+		<statement id="GetInt64"
+					parameterClass="Int"
+					resultClass="long" >
+			select 9223372036854775800 from dual where 1 = #value#
+		</statement>
+		<statement id="GetInt64WithoutResultClass"
+					parameterClass="Int"
+					extends="GetInt64">
+		</statement>
+		
+		<!--
+		Using ODP.NET 10.1
+		Throws System.InvalidCastException
+		at Oracle.DataAccess.Client.OracleDataReader.GetFloat(Int32 i)
+		at IBatisNet.DataMapper.TypeHandlers.SingleTypeHandler.GetValueByIndex(ResultProperty mapping, IDataReader dataReader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\TypeHandlers\SingleTypeHandler.cs:line 75
+		at IBatisNet.DataMapper.TypeHandlers.BaseTypeHandler.GetDataBaseValue(ResultProperty mapping, IDataReader dataReader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\TypeHandlers\BaseTypeHandler.cs:line 58
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.SetObjectProperty(RequestScope request, ResultMap resultMap, ResultProperty mapping, Object& target, IDataReader reader) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 1059
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ApplyResultMap(RequestScope request, IDataReader reader, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 403
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.RunQueryForObject(RequestScope request, IDalSession session, Object parameterObject, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 562
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject, Object resultObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 505
+		at IBatisNet.DataMapper.MappedStatements.MappedStatement.ExecuteQueryForObject(IDalSession session, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\MappedStatements\MappedStatement.cs:line 486
+		at IBatisNet.DataMapper.SqlMapper.QueryForObject(String statementName, Object parameterObject) in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper\SqlMapper.cs:line 489
+		at IBatisNet.DataMapper.Test.NUnit.SqlMapTests.ResultClassTest.TestSingle() in C:\projects\ibatis\asf\trunk\cs\mapper\IBatisNet.DataMapper.Test\NUnit\SqlMapTests\ResultClassTest.cs:line 161
+		-->
+		<statement id="GetSingle"
+					parameterClass="Int"
+					resultClass="float" >
+			select trunc(92233.5,1) from dual where 1 = #value#
+		</statement>
+		<statement id="GetSingleWithoutResultClass"
+					parameterClass="Int"
+					extends="GetSingle">
+		</statement>
+						
+		<statement id="GetString"
+					parameterClass="Int"
+					resultClass="string" >
+			select 'VISA'
+			from dual where 1 = #value#
+		</statement>
+		<statement id="GetStringWithoutResultClass"
+					parameterClass="Int"
+					extends="GetString">
+		</statement>
+		
+	</statements>
+
+</sqlMap>

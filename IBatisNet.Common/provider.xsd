@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://ibatis.apache.org/providers" 
+elementFormDefault="qualified" 
+xmlns:mstns="http://tempuri.org/XMLSchema.xsd" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns="http://ibatis.apache.org/providers"
+xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" 
+vs:friendlyname="iBATIS.NET Providers Configuration Schema" 
+vs:ishtmlschema="false" 
+vs:iscasesensitive="true" 
+vs:requireattributequotes="true" 
+vs:defaultnamespacequalifier="" 
+vs:defaultnsprefix=""> 
+
+<xs:element name="clear">
+	<xs:complexType/>
+</xs:element>
+    
+<xs:element name="provider">
+	<xs:complexType>
+		<xs:attribute name="name" use="required"  type="xs:string"/>
+		<xs:attribute name="description" type="xs:string"/>           
+		<xs:attribute name="enabled" type="xs:boolean"/>
+		<xs:attribute name="default" type="xs:boolean"/>
+		<xs:attribute name="assemblyName" type="xs:string" use="required"/>
+		<xs:attribute name="connectionClass" use="required" type="xs:string" />
+		<xs:attribute name="commandClass" use="required" type="xs:string" />
+		<xs:attribute name="parameterClass" use="required" type="xs:string" />
+		<xs:attribute name="parameterDbTypeClass" type="xs:string" use="required"/>
+		<xs:attribute name="parameterDbTypeProperty" use="required" type="xs:string" />
+		<xs:attribute name="dataAdapterClass" use="required"  type="xs:string" />
+		<xs:attribute name="commandBuilderClass" use="required" type="xs:string" />
+		<xs:attribute name="usePositionalParameters" use="required" type="xs:string" />
+		<xs:attribute name="useParameterPrefixInSql" use="required" type="xs:boolean"/>
+		<xs:attribute name="useParameterPrefixInParameter" use="required" type="xs:boolean"/>
+		<xs:attribute name="parameterPrefix"  type="xs:string"/>
+		<xs:attribute name="useDeriveParameters" type="xs:boolean"/>
+		<xs:attribute name="setDbParameterPrecision" type="xs:boolean"/>
+		<xs:attribute name="setDbParameterScale" type="xs:boolean"/>
+		<xs:attribute name="setDbParameterSize" type="xs:boolean"/>
+		<xs:attribute name="allowMARS" type="xs:boolean" default="false"/>
+	</xs:complexType>
+</xs:element>
+<xs:element name="providers">
+	<xs:complexType>
+		<xs:sequence>
+		<xs:element ref="clear"/>
+		<xs:element ref="provider" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+</xs:schema>
