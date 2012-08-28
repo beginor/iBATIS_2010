@@ -524,6 +524,9 @@
     <Content Include="Scripts\PostgreSQL\simple-init.sql" />
     <Content Include="Scripts\PostgreSQL\swap-procedure.sql" />
     <Content Include="Scripts\PostgreSQL\user-init.sql" />
+    <None Include="database.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="DataBase-Template.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

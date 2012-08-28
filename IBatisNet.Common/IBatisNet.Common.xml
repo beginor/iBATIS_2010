@@ -4029,37 +4029,6 @@
             Cosntructor
             </summary>
         </member>
-        <member name="M:IBatisNet.Common.Utilities.Proxy.CachedProxyGenerator.CreateProxy(System.Type,Castle.DynamicProxy.IInterceptor,System.Object)">
-            <summary>
-            Generates a proxy implementing all the specified interfaces and
-            redirecting method invocations to the specifed interceptor.
-            </summary>
-            <param name="theInterface">Interface to be implemented</param>
-            <param name="interceptor">instance of <see cref="T:Castle.DynamicProxy.IInterceptor"/></param>
-            <param name="target">The target object.</param>
-            <returns>Proxy instance</returns>
-        </member>
-        <member name="M:IBatisNet.Common.Utilities.Proxy.CachedProxyGenerator.CreateProxy(System.Type[],Castle.DynamicProxy.IInterceptor,System.Object)">
-            <summary>
-            Generates a proxy implementing all the specified interfaces and
-            redirecting method invocations to the specifed interceptor.
-            </summary>
-            <param name="interfaces">Array of interfaces to be implemented</param>
-            <param name="interceptor">instance of <see cref="T:Castle.DynamicProxy.IInterceptor"/></param>
-            <param name="target">The target object.</param>
-            <returns>Proxy instance</returns>
-        </member>
-        <member name="M:IBatisNet.Common.Utilities.Proxy.CachedProxyGenerator.CreateClassProxy(System.Type,Castle.DynamicProxy.IInterceptor,System.Object[])">
-            <summary>
-            Generates a proxy implementing all the specified interfaces and
-            redirecting method invocations to the specifed interceptor.
-            This proxy is for object different from IList or ICollection
-            </summary>
-            <param name="targetType">The target type</param>
-            <param name="interceptor">The interceptor.</param>
-            <param name="argumentsForConstructor">The arguments for constructor.</param>
-            <returns></returns>
-        </member>
         <member name="T:IBatisNet.Common.Utilities.Objects.ActivatorObjectFactory">
             <summary>
             A <see cref="T:IBatisNet.Common.Utilities.Objects.IObjectFactory"/> implementation that can create objects 
