@@ -384,14 +384,14 @@ namespace IBatisNet.DataMapper.Test.NUnit.SqlMapTests
 		[Test] 
 		public void TestConfigureViaStream()
 		{
-			// embeddedResource = "bin.Debug.SqlMap_MSSQL_SqlClient.config, IBatisNet.DataMapper.Test";
+			// embeddedResource = "SqlMap_MSSQL_SqlClient.config, IBatisNet.DataMapper.Test";
 			
 #if dotnet2
             Assembly assembly = Assembly.Load("IBatisNet.DataMapper.Test");
 #else
 			Assembly assembly = Assembly.LoadWithPartialName ("IBatisNet.DataMapper.Test");
 #endif
-			Stream stream = assembly.GetManifestResourceStream("IBatisNet.DataMapper.Test.bin.Debug.SqlMap_MSSQL_SqlClient.config");
+			Stream stream = assembly.GetManifestResourceStream("IBatisNet.DataMapper.Test.SqlMap_MSSQL_SqlClient.config");
 
 			DomSqlMapBuilder builder = new DomSqlMapBuilder();
 
