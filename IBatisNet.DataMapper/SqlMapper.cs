@@ -1134,6 +1134,148 @@ namespace IBatisNet.DataMapper
 #endif
         #endregion
 
+      #region QueryForDataTable
+
+        /// <summary>
+        /// Executes the SQL and retuns all rows selected.
+        /// <p/>
+        /// </summary>
+        /// <param name="statementName">Name of the statement.</param>
+        /// <param name="parameterObject">The parameter object.</param>
+        /// <returns></returns>
+        public DataTable QueryForDataTable(string statementName, object parameterObject)
+        {
+
+            bool isSessionLocal = false;
+            ISqlMapSession session = _sessionStore.LocalSession;
+            DataTable dataTable = null;
+
+            if (session == null)
+            {
+                session = CreateSqlMapSession();
+                isSessionLocal = true;
+            }
+
+            try
+            {
+                IMappedStatement statement = GetMappedStatement(statementName);
+                dataTable = new DataTable(statementName);
+                RequestScope request = statement.Statement.Sql.GetRequestScope(statement, parameterObject, session);
+                statement.PreparedCommand.Create(request, session, statement.Statement, parameterObject);
+
+                using (request.IDbCommand)
+                {
+                    dataTable.Load(request.IDbCommand.ExecuteReader());
+
+                }
+
+
+            }
+            finally
+            {
+                if (isSessionLocal)
+                {
+                    session.CloseConnection();
+                }
+            }
+
+            return dataTable;
+
+        }
+#endregion
+
+        #region QueryForDataTable
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statementName"></param>
+        /// <param name="parameterObject"></param>
+        /// <returns></returns>
+        public DataSet QueryForDataSet(string statementName, object parameterObject)
+        {
+            bool isSessionLocal = false;
+            ISqlMapSession session = _sessionStore.LocalSession;
+            DataSet ds = new DataSet(statementName);
+            if (session == null)
+            {
+                session = CreateSqlMapSession();
+                isSessionLocal = true;
+            }
+            try
+            {
+                IMappedStatement statement = GetMappedStatement(statementName);
+            
+                RequestScope request = statement.Statement.Sql.GetRequestScope(statement, parameterObject, session);
+                statement.PreparedCommand.Create(request, session, statement.Statement, parameterObject);
+                using (request.IDbCommand)
+                {
+                    IDataReader reader = request.IDbCommand.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    while(! reader.IsClosed){
+                        dt.Load(reader);
+                    }
+                    ds.Tables.Add(dt);
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (isSessionLocal)
+                {
+                    session.CloseConnection();
+                }
+            }
+            return ds;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statementName"></param>
+        /// <param name="parameterObject"></param>
+        /// <returns></returns>
+        public DataSet QueryForDataSet2(string statementName, object parameterObject)
+        {
+            bool isSessionLocal = false;
+            ISqlMapSession session = _sessionStore.LocalSession;
+            DataSet ds = new DataSet(statementName);
+            if (session == null)
+            {
+                session = CreateSqlMapSession();
+                isSessionLocal = true;
+            }
+            try
+            {
+                IMappedStatement statement = GetMappedStatement(statementName);
+                RequestScope request = statement.Statement.Sql.GetRequestScope(statement, parameterObject, session);
+                statement.PreparedCommand.Create(request, session, statement.Statement, parameterObject);
+                FieldInfo info = request.IDbCommand.GetType().GetField("_innerDbCommand", BindingFlags.NonPublic | BindingFlags.Instance);
+                using (IDbCommand cmd = (IDbCommand)info.GetValue(request.IDbCommand))
+                {
+                    session.CreateDataAdapter(cmd).Fill(ds);
+                }
+ 
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (isSessionLocal)
+                {
+                    session.CloseConnection();
+                }
+            }
+            return ds;
+        }
+        
+        #endregion
 		#region QueryForPaginatedList
 		/// <summary>
 		/// Executes the SQL and retuns a subset of the results in a dynamic PaginatedList that can be used to
